@@ -1,0 +1,63 @@
+.plugin-view {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.plugin-view.loading {
+  justify-content: center;
+  align-items: center;
+}
+
+.plugin-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.back-button {
+  padding: 8px 16px;
+  border: none;
+  background: #667eea;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.back-button:hover {
+  background: #5568d3;
+}
+
+.plugin-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.plugin-content {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+}
+
+.plugin-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.plugin-placeholder p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.plugin-placeholder small {
+  color: #999;
+}

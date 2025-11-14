@@ -1,0 +1,11 @@
+{
+  "id": "example-downloader",
+  "name": "文件下载器",
+  "version": "1.0.0",
+  "description": "简单的文件下载工具,支持 HTTP/HTTPS 下载",
+  "author": "ToolsHub Team",
+  "icon": "📥",
+  "entry": "index.tsx",
+  "type": "tool",
+  "permissions": ["file-system", "network"]
+}

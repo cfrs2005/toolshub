@@ -1,0 +1,11 @@
+{
+  "id": "example-counter",
+  "name": "计数器示例",
+  "version": "1.0.0",
+  "description": "一个简单的计数器工具,演示数据存储功能",
+  "author": "ToolsHub Team",
+  "icon": "🔢",
+  "entry": "index.tsx",
+  "type": "tool",
+  "permissions": []
+}
