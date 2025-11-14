@@ -1,0 +1,9 @@
+{
+  "name": "youtube-analyzer",
+  "version": "1.0.0",
+  "description": "YouTube video analysis plugin",
+  "dependencies": {
+    "youtube-transcript": "^1.0.6",
+    "axios": "^1.6.0"
+  }
+}
