@@ -41,7 +41,12 @@ function createWindow() {
  */
 app.whenReady().then(async () => {
   // 初始化插件加载器
-  pluginLoader = new PluginLoader(path.join(app.getPath('userData'), 'plugins'));
+  // 开发环境从源代码目录加载插件，生产环境从用户数据目录加载
+  const pluginsDir = process.env.NODE_ENV === 'development'
+    ? path.join(__dirname, '../../src/plugins')
+    : path.join(app.getPath('userData'), 'plugins');
+
+  pluginLoader = new PluginLoader(pluginsDir);
   await pluginLoader.loadPlugins();
 
   createWindow();
