@@ -5,51 +5,32 @@ import React, { useState, useEffect } from 'react';
 import { fetchTranscript, VideoInfo } from './youtubeService';
 import { BigModelService, AnalysisResult } from './aiService';
 import { generateHTMLReport } from './reportGenerator';
-
-const PLUGIN_ID = 'youtube-analyzer';
-const API_KEY_STORAGE_KEY = 'bigmodel_api_key';
-const PROXY_URL_STORAGE_KEY = 'proxy_url';
+import { HistoryService } from './historyService';
+import { AnalysisHistory } from './types';
+import SettingsPanel from './SettingsPanel';
 
 const YouTubeAnalyzer: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState('');
-  const [apiKey, setApiKey] = useState('');
-  const [proxyUrl, setProxyUrl] = useState('');
   const [status, setStatus] = useState<'idle' | 'fetching' | 'analyzing' | 'completed' | 'error'>('idle');
   const [progress, setProgress] = useState('');
   const [error, setError] = useState('');
-  const [videoInfo, setVideoInfo] = useState<VideoInfo | null>(null);
-  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
-  const [reportHtml, setReportHtml] = useState<string>('');
+  const [history, setHistory] = useState<AnalysisHistory[]>([]);
+  const [showSettings, setShowSettings] = useState(false);
+  const [configValid, setConfigValid] = useState(false);
 
-  // 加载保存的配置
   useEffect(() => {
-    const loadSettings = async () => {
-      try {
-        const savedApiKey = await window.electronAPI.pluginStorage.get(PLUGIN_ID, API_KEY_STORAGE_KEY);
-        const savedProxyUrl = await window.electronAPI.pluginStorage.get(PLUGIN_ID, PROXY_URL_STORAGE_KEY);
-
-        if (savedApiKey) {
-          setApiKey(savedApiKey);
-        }
-        if (savedProxyUrl) {
-          setProxyUrl(savedProxyUrl);
-        }
-      } catch (err) {
-        console.error('加载配置失败:', err);
-      }
-    };
-    loadSettings();
+    loadHistory();
+    checkConfig();
   }, []);
 
-  // 保存配置
-  const handleSaveSettings = async () => {
-    try {
-      await window.electronAPI.pluginStorage.set(PLUGIN_ID, API_KEY_STORAGE_KEY, apiKey);
-      await window.electronAPI.pluginStorage.set(PLUGIN_ID, PROXY_URL_STORAGE_KEY, proxyUrl);
-      alert('配置已保存');
-    } catch (err) {
-      alert('保存配置失败');
-    }
+  const checkConfig = async () => {
+    const config = await HistoryService.getConfig();
+    setConfigValid(!!config.apiKey.trim());
+  };
+
+  const loadHistory = async () => {
+    const recentHistory = await HistoryService.getRecentRecords(10);
+    setHistory(recentHistory);
   };
 
   // 开始分析
@@ -59,39 +40,49 @@ const YouTubeAnalyzer: React.FC = () => {
       return;
     }
 
-    if (!apiKey.trim()) {
-      setError('请输入 BigModel API Key');
+    if (!configValid) {
+      setError('请先在设置中配置 API Key');
+      setShowSettings(true);
       return;
     }
 
     setStatus('fetching');
     setError('');
     setProgress('正在获取视频字幕...');
-    setVideoInfo(null);
-    setAnalysisResult(null);
-    setReportHtml('');
 
     try {
-      // 1. 获取字幕（使用代理）
-      const video = await fetchTranscript(videoUrl, proxyUrl || undefined);
-      setVideoInfo(video);
-      setProgress(`字幕获取成功！共 ${video.transcriptItems.length} 条字幕，总计 ${video.transcript.length} 字符`);
+      const config = await HistoryService.getConfig();
+
+      // 1. 获取字幕
+      const video = await fetchTranscript(videoUrl, config.proxyUrl || undefined);
+      setProgress(`字幕获取成功!共 ${video.transcriptItems.length} 条字幕`);
 
       // 2. AI 分析
       setStatus('analyzing');
       setProgress('正在调用 AI 进行分析...');
 
-      const aiService = new BigModelService({ apiKey });
+      const aiService = new BigModelService({ apiKey: config.apiKey });
       const analysis = await aiService.analyzeVideo(video.transcript);
-      setAnalysisResult(analysis);
 
       // 3. 生成报告
       setProgress('正在生成 HTML 报告...');
       const html = generateHTMLReport(video, analysis);
-      setReportHtml(html);
+
+      // 4. 保存到历史记录
+      await HistoryService.saveAnalysis(video, analysis, html);
 
       setStatus('completed');
-      setProgress('分析完成！');
+      setProgress('分析完成!');
+      setVideoUrl('');
+
+      // 重新加载历史记录
+      loadHistory();
+
+      // 2 秒后自动清除提示
+      setTimeout(() => {
+        setStatus('idle');
+        setProgress('');
+      }, 2000);
     } catch (err: any) {
       setStatus('error');
       setError(err.message || '分析过程中出现错误');
@@ -99,129 +90,91 @@ const YouTubeAnalyzer: React.FC = () => {
     }
   };
 
-  // 下载报告
-  const handleDownloadReport = () => {
-    if (!reportHtml) return;
+  // 预览历史记录
+  const handlePreview = (record: AnalysisHistory) => {
+    if (record.reportHtml) {
+      const newWindow = window.open();
+      if (newWindow) {
+        newWindow.document.write(record.reportHtml);
+        newWindow.document.close();
+      }
+    }
+  };
 
-    const blob = new Blob([reportHtml], { type: 'text/html;charset=utf-8' });
+  // 下载历史记录
+  const handleDownload = (record: AnalysisHistory) => {
+    if (!record.reportHtml) return;
+
+    const blob = new Blob([record.reportHtml], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `youtube-analysis-${videoInfo?.videoId || Date.now()}.html`;
+    link.download = `youtube-analysis-${record.videoInfo.videoId}.html`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
 
-  // 预览报告
-  const handlePreviewReport = () => {
-    if (!reportHtml) return;
-
-    const newWindow = window.open();
-    if (newWindow) {
-      newWindow.document.write(reportHtml);
-      newWindow.document.close();
+  // 删除历史记录
+  const handleDelete = async (id: string) => {
+    if (confirm('确定要删除这条记录吗?')) {
+      await HistoryService.deleteRecord(id);
+      loadHistory();
     }
-  };
-
-  // 重置
-  const handleReset = () => {
-    setStatus('idle');
-    setProgress('');
-    setError('');
-    setVideoInfo(null);
-    setAnalysisResult(null);
-    setReportHtml('');
   };
 
   return (
     <div style={styles.container}>
+      {/* 头部 */}
       <div style={styles.header}>
-        <h1 style={styles.title}>🎬 YouTube 视频分析工具</h1>
-        <p style={styles.subtitle}>基于 AI 生成视频内容的深度分析报告</p>
+        <div>
+          <h1 style={styles.title}>🎬 YouTube 视频分析</h1>
+          <p style={styles.subtitle}>基于 AI 生成视频内容的深度分析报告</p>
+        </div>
+        <button onClick={() => setShowSettings(true)} style={styles.settingsButton}>
+          ⚙️ 设置
+        </button>
       </div>
 
-      {/* API Key 配置 */}
-      <div style={styles.section}>
-        <h3 style={styles.sectionTitle}>⚙️ API 配置</h3>
-        <div style={styles.inputGroup}>
-          <input
-            type="password"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            placeholder="请输入 BigModel API Key"
-            style={styles.input}
-            disabled={status === 'fetching' || status === 'analyzing'}
-          />
+      {/* 配置提示 */}
+      {!configValid && (
+        <div style={styles.warningBox}>
+          <span style={styles.warningIcon}>⚠️</span>
+          <span>请先在设置中配置 BigModel API Key</span>
+          <button onClick={() => setShowSettings(true)} style={styles.warningButton}>
+            立即配置
+          </button>
         </div>
-        <p style={styles.hint}>
-          获取 API Key: <a href="https://open.bigmodel.cn/" target="_blank" rel="noopener noreferrer">open.bigmodel.cn</a>
-        </p>
+      )}
 
-        <div style={styles.inputGroup}>
+      {/* 快速输入 */}
+      <div style={styles.inputSection}>
+        <div style={styles.inputWrapper}>
           <input
             type="text"
-            value={proxyUrl}
-            onChange={(e) => setProxyUrl(e.target.value)}
-            placeholder="代理地址（可选），例如: http://127.0.0.1:1087"
+            value={videoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
+            placeholder="粘贴 YouTube 视频链接,例如: https://www.youtube.com/watch?v=xxxxx"
             style={styles.input}
             disabled={status === 'fetching' || status === 'analyzing'}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleAnalyze();
+              }
+            }}
           />
+          <button
+            onClick={handleAnalyze}
+            style={{
+              ...styles.analyzeButton,
+              ...(status === 'fetching' || status === 'analyzing' ? styles.buttonDisabled : {}),
+            }}
+            disabled={status === 'fetching' || status === 'analyzing'}
+          >
+            {status === 'fetching' || status === 'analyzing' ? '分析中...' : '🚀 开始分析'}
+          </button>
         </div>
-        <p style={styles.hint}>
-          如需访问 YouTube，请配置代理地址（格式: http://host:port）
-        </p>
-
-        <button
-          onClick={handleSaveSettings}
-          style={styles.saveButton}
-          disabled={status === 'fetching' || status === 'analyzing'}
-        >
-          保存配置
-        </button>
-      </div>
-
-      {/* 视频 URL 输入 */}
-      <div style={styles.section}>
-        <h3 style={styles.sectionTitle}>📹 视频链接</h3>
-        <input
-          type="text"
-          value={videoUrl}
-          onChange={(e) => setVideoUrl(e.target.value)}
-          placeholder="输入 YouTube 视频链接，例如: https://www.youtube.com/watch?v=xxxxx"
-          style={styles.input}
-          disabled={status === 'fetching' || status === 'analyzing'}
-        />
-      </div>
-
-      {/* 操作按钮 */}
-      <div style={styles.buttonGroup}>
-        <button
-          onClick={handleAnalyze}
-          style={{
-            ...styles.button,
-            ...styles.primaryButton,
-            ...(status === 'fetching' || status === 'analyzing' ? styles.buttonDisabled : {}),
-          }}
-          disabled={status === 'fetching' || status === 'analyzing'}
-        >
-          {status === 'fetching' || status === 'analyzing' ? '分析中...' : '🚀 开始分析'}
-        </button>
-
-        {status === 'completed' && (
-          <>
-            <button onClick={handlePreviewReport} style={{ ...styles.button, ...styles.secondaryButton }}>
-              👁️ 预览报告
-            </button>
-            <button onClick={handleDownloadReport} style={{ ...styles.button, ...styles.secondaryButton }}>
-              💾 下载报告
-            </button>
-            <button onClick={handleReset} style={{ ...styles.button, ...styles.secondaryButton }}>
-              🔄 重新分析
-            </button>
-          </>
-        )}
       </div>
 
       {/* 进度提示 */}
@@ -242,47 +195,107 @@ const YouTubeAnalyzer: React.FC = () => {
         </div>
       )}
 
-      {/* 分析结果摘要 */}
-      {status === 'completed' && analysisResult && (
-        <div style={styles.section}>
-          <h3 style={styles.sectionTitle}>📊 分析结果概览</h3>
-          <div style={styles.resultSummary}>
-            <div style={styles.summaryItem}>
-              <span style={styles.summaryLabel}>视频 ID:</span>
-              <span style={styles.summaryValue}>{videoInfo?.videoId}</span>
-            </div>
-            <div style={styles.summaryItem}>
-              <span style={styles.summaryLabel}>字幕长度:</span>
-              <span style={styles.summaryValue}>{videoInfo?.transcript.length} 字符</span>
-            </div>
-            <div style={styles.summaryItem}>
-              <span style={styles.summaryLabel}>关键点数:</span>
-              <span style={styles.summaryValue}>{analysisResult.keyPoints.length} 个</span>
-            </div>
-          </div>
+      {/* 历史记录 */}
+      <div style={styles.historySection}>
+        <div style={styles.historySectionHeader}>
+          <h3 style={styles.historyTitle}>📚 分析历史</h3>
+          {history.length > 0 && (
+            <button
+              onClick={async () => {
+                if (confirm('确定要清空所有历史记录吗?')) {
+                  await HistoryService.clearHistory();
+                  loadHistory();
+                }
+              }}
+              style={styles.clearButton}
+            >
+              清空
+            </button>
+          )}
         </div>
-      )}
+
+        {history.length === 0 ? (
+          <div style={styles.emptyState}>
+            <p style={styles.emptyIcon}>📭</p>
+            <p style={styles.emptyText}>暂无分析记录</p>
+            <p style={styles.emptyHint}>输入视频链接开始第一次分析吧!</p>
+          </div>
+        ) : (
+          <div style={styles.historyList}>
+            {history.map((record) => (
+              <div key={record.id} style={styles.historyCard}>
+                {/* 缩略图 */}
+                {record.thumbnailUrl && (
+                  <div style={styles.thumbnail}>
+                    <img src={record.thumbnailUrl} alt="thumbnail" style={styles.thumbnailImage} />
+                  </div>
+                )}
+
+                {/* 内容 */}
+                <div style={styles.historyContent}>
+                  <h4 style={styles.historyVideoId}>视频 ID: {record.videoInfo.videoId}</h4>
+                  <p style={styles.historyMeta}>
+                    <span>🕒 {HistoryService.formatTimestamp(record.timestamp)}</span>
+                    <span style={{ marginLeft: '15px' }}>
+                      📝 {record.analysisResult.keyPoints.length} 个关键点
+                    </span>
+                  </p>
+                  <p style={styles.historySummary}>
+                    {record.analysisResult.readingNotes.substring(0, 100)}...
+                  </p>
+                </div>
+
+                {/* 操作按钮 */}
+                <div style={styles.historyActions}>
+                  <button
+                    onClick={() => handlePreview(record)}
+                    style={{ ...styles.actionButton, ...styles.previewButton }}
+                    title="预览报告"
+                  >
+                    👁️
+                  </button>
+                  <button
+                    onClick={() => handleDownload(record)}
+                    style={{ ...styles.actionButton, ...styles.downloadButton }}
+                    title="下载报告"
+                  >
+                    💾
+                  </button>
+                  <button
+                    onClick={() => handleDelete(record.id)}
+                    style={{ ...styles.actionButton, ...styles.deleteButton }}
+                    title="删除记录"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* 使用说明 */}
-      <div style={styles.section}>
-        <h3 style={styles.sectionTitle}>📖 使用说明</h3>
-        <ol style={styles.instructionsList}>
-          <li>配置 BigModel API Key（需要在 <a href="https://open.bigmodel.cn/" target="_blank" rel="noopener noreferrer">open.bigmodel.cn</a> 注册获取）</li>
-          <li>输入 YouTube 视频链接</li>
-          <li>点击"开始分析"按钮</li>
-          <li>等待 AI 分析完成（可能需要几分钟）</li>
-          <li>预览或下载生成的 HTML 报告</li>
+      <div style={styles.helpSection}>
+        <h4 style={styles.helpTitle}>💡 使用说明</h4>
+        <ol style={styles.helpList}>
+          <li>点击右上角"设置"配置 BigModel API Key</li>
+          <li>输入或粘贴 YouTube 视频链接</li>
+          <li>点击"开始分析"或按 Enter 键</li>
+          <li>等待 AI 分析完成(约 1-3 分钟)</li>
+          <li>在历史记录中预览或下载分析报告</li>
         </ol>
-        <div style={styles.features}>
-          <h4 style={styles.featuresTitle}>报告包含以下内容：</h4>
-          <ul style={styles.featuresList}>
-            <li>📝 阅读笔记 - 视频内容的详细总结</li>
-            <li>🗺️ 思维导图 - 内容的层级结构</li>
-            <li>⭐ 重点分析 - 关键要点提取</li>
-            <li>💡 深度思考 - AI 生成的见解和启发</li>
-          </ul>
-        </div>
       </div>
+
+      {/* 设置面板 */}
+      {showSettings && (
+        <SettingsPanel
+          onClose={() => {
+            setShowSettings(false);
+            checkConfig();
+          }}
+        />
+      )}
     </div>
   );
 };
@@ -291,56 +304,34 @@ const YouTubeAnalyzer: React.FC = () => {
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     padding: '30px',
-    maxWidth: '900px',
+    maxWidth: '1000px',
     margin: '0 auto',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
   },
   header: {
-    textAlign: 'center',
-    marginBottom: '40px',
-    padding: '30px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '30px',
+    padding: '25px',
     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     borderRadius: '12px',
     color: 'white',
   },
   title: {
-    fontSize: '2.5em',
-    marginBottom: '10px',
+    fontSize: '2em',
+    margin: '0 0 8px 0',
     fontWeight: 'bold',
   },
   subtitle: {
-    fontSize: '1.1em',
+    fontSize: '1em',
+    margin: 0,
     opacity: 0.95,
   },
-  section: {
-    marginBottom: '30px',
-    padding: '25px',
-    background: '#f8f9fa',
-    borderRadius: '10px',
-  },
-  sectionTitle: {
-    fontSize: '1.3em',
-    marginBottom: '15px',
-    color: '#2c3e50',
-    fontWeight: 'bold',
-  },
-  inputGroup: {
-    display: 'flex',
-    gap: '10px',
-  },
-  input: {
-    flex: 1,
-    padding: '12px 15px',
+  settingsButton: {
+    padding: '12px 24px',
     fontSize: '1em',
-    border: '2px solid #e0e0e0',
-    borderRadius: '8px',
-    outline: 'none',
-    transition: 'border-color 0.3s',
-  },
-  saveButton: {
-    padding: '12px 25px',
-    fontSize: '1em',
-    background: '#667eea',
+    background: 'rgba(255,255,255,0.2)',
     color: 'white',
     border: 'none',
     borderRadius: '8px',
@@ -348,33 +339,55 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontWeight: 'bold',
     transition: 'background 0.3s',
   },
-  hint: {
-    marginTop: '10px',
-    fontSize: '0.9em',
-    color: '#6c757d',
-  },
-  buttonGroup: {
+  warningBox: {
     display: 'flex',
+    alignItems: 'center',
     gap: '15px',
-    marginBottom: '30px',
-    flexWrap: 'wrap',
-  },
-  button: {
-    padding: '14px 28px',
-    fontSize: '1em',
-    border: 'none',
+    padding: '15px 20px',
+    background: '#fff3cd',
     borderRadius: '8px',
+    marginBottom: '20px',
+    border: '1px solid #ffc107',
+  },
+  warningIcon: {
+    fontSize: '1.5em',
+  },
+  warningButton: {
+    marginLeft: 'auto',
+    padding: '8px 16px',
+    background: '#ffc107',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+  },
+  inputSection: {
+    marginBottom: '25px',
+  },
+  inputWrapper: {
+    display: 'flex',
+    gap: '12px',
+  },
+  input: {
+    flex: 1,
+    padding: '14px 18px',
+    fontSize: '1em',
+    border: '2px solid #e0e0e0',
+    borderRadius: '10px',
+    outline: 'none',
+    transition: 'border-color 0.3s',
+  },
+  analyzeButton: {
+    padding: '14px 32px',
+    fontSize: '1em',
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '10px',
     cursor: 'pointer',
     fontWeight: 'bold',
     transition: 'all 0.3s',
-  },
-  primaryButton: {
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white',
-  },
-  secondaryButton: {
-    background: '#6c757d',
-    color: 'white',
+    whiteSpace: 'nowrap',
   },
   buttonDisabled: {
     opacity: 0.6,
@@ -384,77 +397,175 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     gap: '15px',
-    padding: '20px',
+    padding: '18px 20px',
     background: '#e7f3ff',
     borderRadius: '10px',
     marginBottom: '20px',
     border: '2px solid #2196f3',
   },
   progressIcon: {
-    fontSize: '2em',
+    fontSize: '1.8em',
   },
   progressText: {
-    fontSize: '1.1em',
+    fontSize: '1em',
     color: '#1976d2',
     fontWeight: '500',
+    margin: 0,
   },
   errorBox: {
     display: 'flex',
     alignItems: 'center',
     gap: '15px',
-    padding: '20px',
+    padding: '18px 20px',
     background: '#ffebee',
     borderRadius: '10px',
     marginBottom: '20px',
     border: '2px solid #f44336',
   },
   errorIcon: {
-    fontSize: '2em',
+    fontSize: '1.8em',
   },
   errorText: {
-    fontSize: '1.1em',
+    fontSize: '1em',
     color: '#c62828',
     fontWeight: '500',
+    margin: 0,
   },
-  resultSummary: {
-    display: 'grid',
-    gap: '15px',
+  historySection: {
+    marginTop: '40px',
   },
-  summaryItem: {
+  historySectionHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '12px',
-    background: 'white',
-    borderRadius: '8px',
+    alignItems: 'center',
+    marginBottom: '20px',
   },
-  summaryLabel: {
+  historyTitle: {
+    fontSize: '1.5em',
+    margin: 0,
+    color: '#2c3e50',
     fontWeight: 'bold',
-    color: '#495057',
   },
-  summaryValue: {
-    color: '#667eea',
-    fontWeight: '600',
+  clearButton: {
+    padding: '8px 16px',
+    background: '#e0e0e0',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    fontSize: '0.9em',
   },
-  instructionsList: {
-    paddingLeft: '25px',
-    lineHeight: '1.8',
-    color: '#495057',
+  emptyState: {
+    textAlign: 'center',
+    padding: '60px 20px',
+    background: '#f8f9fa',
+    borderRadius: '12px',
   },
-  features: {
-    marginTop: '20px',
-    padding: '20px',
-    background: 'white',
+  emptyIcon: {
+    fontSize: '4em',
+    margin: '0 0 15px 0',
+  },
+  emptyText: {
+    fontSize: '1.2em',
+    color: '#6c757d',
+    margin: '0 0 8px 0',
+  },
+  emptyHint: {
+    fontSize: '0.95em',
+    color: '#adb5bd',
+    margin: 0,
+  },
+  historyList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px',
+  },
+  historyCard: {
+    display: 'flex',
+    gap: '15px',
+    padding: '15px',
+    background: '#f8f9fa',
+    borderRadius: '10px',
+    transition: 'transform 0.2s, box-shadow 0.2s',
+  },
+  thumbnail: {
+    width: '160px',
+    height: '90px',
+    flexShrink: 0,
     borderRadius: '8px',
+    overflow: 'hidden',
+    background: '#e0e0e0',
   },
-  featuresTitle: {
+  thumbnailImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  historyContent: {
+    flex: 1,
+    minWidth: 0,
+  },
+  historyVideoId: {
     fontSize: '1.1em',
-    marginBottom: '10px',
+    margin: '0 0 8px 0',
+    color: '#2c3e50',
+    fontWeight: 'bold',
+  },
+  historyMeta: {
+    fontSize: '0.9em',
+    color: '#6c757d',
+    margin: '0 0 10px 0',
+  },
+  historySummary: {
+    fontSize: '0.95em',
+    color: '#495057',
+    margin: 0,
+    lineHeight: 1.5,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+  },
+  historyActions: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    justifyContent: 'center',
+  },
+  actionButton: {
+    width: '40px',
+    height: '40px',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontSize: '1.2em',
+    transition: 'all 0.2s',
+  },
+  previewButton: {
+    background: '#e3f2fd',
+  },
+  downloadButton: {
+    background: '#e8f5e9',
+  },
+  deleteButton: {
+    background: '#ffebee',
+  },
+  helpSection: {
+    marginTop: '40px',
+    padding: '20px 25px',
+    background: '#f8f9fa',
+    borderRadius: '10px',
+  },
+  helpTitle: {
+    fontSize: '1.1em',
+    margin: '0 0 12px 0',
     color: '#2c3e50',
   },
-  featuresList: {
+  helpList: {
     paddingLeft: '25px',
     lineHeight: '1.8',
     color: '#495057',
+    margin: 0,
   },
 };
 
