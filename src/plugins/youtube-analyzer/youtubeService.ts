@@ -1,7 +1,6 @@
 /**
  * YouTube 字幕下载服务
  */
-import { YoutubeTranscript } from 'youtube-transcript';
 
 export interface TranscriptItem {
   text: string;
@@ -44,7 +43,7 @@ export function extractVideoId(url: string): string | null {
 /**
  * 获取 YouTube 视频的字幕
  */
-export async function fetchTranscript(videoUrl: string): Promise<VideoInfo> {
+export async function fetchTranscript(videoUrl: string, proxyUrl?: string): Promise<VideoInfo> {
   const videoId = extractVideoId(videoUrl);
 
   if (!videoId) {
@@ -52,7 +51,8 @@ export async function fetchTranscript(videoUrl: string): Promise<VideoInfo> {
   }
 
   try {
-    const transcriptItems = await YoutubeTranscript.fetchTranscript(videoId);
+    // 使用主进程的 API 获取字幕（支持代理）
+    const transcriptItems = await window.electronAPI.youtube.fetchTranscript(videoId, proxyUrl);
 
     if (!transcriptItems || transcriptItems.length === 0) {
       throw new Error('该视频没有可用的字幕');

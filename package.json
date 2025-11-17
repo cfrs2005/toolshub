@@ -2,7 +2,7 @@
   "name": "toolshub",
   "version": "1.0.0",
   "description": "Cross-platform tools hub framework",
-  "main": "dist/main/index.js",
+  "main": "dist/main/main/index.js",
   "author": "ToolsHub Team",
   "license": "MIT",
   "scripts": {
@@ -17,10 +17,14 @@
     "package:win": "npm run build && electron-builder --win"
   },
   "dependencies": {
-    "electron-store": "^8.1.0",
+    "axios": "^1.6.0",
     "better-sqlite3": "^9.2.2",
+    "electron-store": "^8.1.0",
+    "global-agent": "^3.0.0",
+    "https-proxy-agent": "^7.0.6",
+    "undici": "^7.16.0",
     "youtube-transcript": "^1.0.6",
-    "axios": "^1.6.0"
+    "youtubei.js": "^16.0.1"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.8",
@@ -30,7 +34,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
-    "electron": "^28.1.0",
+    "electron": "^39.2.1",
     "electron-builder": "^24.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

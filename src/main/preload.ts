@@ -29,6 +29,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
     keys: (pluginId: string): Promise<string[]> =>
       ipcRenderer.invoke('plugin-storage-keys', pluginId),
   },
+
+  // YouTube 服务
+  youtube: {
+    fetchTranscript: (videoId: string, proxyUrl?: string): Promise<any[]> =>
+      ipcRenderer.invoke('youtube-fetch-transcript', videoId, proxyUrl),
+  },
 });
 
 // TypeScript 类型声明
@@ -46,6 +52,9 @@ declare global {
         clear: (pluginId: string) => Promise<void>;
         has: (pluginId: string, key: string) => Promise<boolean>;
         keys: (pluginId: string) => Promise<string[]>;
+      };
+      youtube: {
+        fetchTranscript: (videoId: string, proxyUrl?: string) => Promise<any[]>;
       };
     };
   }

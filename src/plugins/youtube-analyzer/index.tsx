@@ -8,10 +8,12 @@ import { generateHTMLReport } from './reportGenerator';
 
 const PLUGIN_ID = 'youtube-analyzer';
 const API_KEY_STORAGE_KEY = 'bigmodel_api_key';
+const PROXY_URL_STORAGE_KEY = 'proxy_url';
 
 const YouTubeAnalyzer: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState('');
   const [apiKey, setApiKey] = useState('');
+  const [proxyUrl, setProxyUrl] = useState('');
   const [status, setStatus] = useState<'idle' | 'fetching' | 'analyzing' | 'completed' | 'error'>('idle');
   const [progress, setProgress] = useState('');
   const [error, setError] = useState('');
@@ -19,28 +21,34 @@ const YouTubeAnalyzer: React.FC = () => {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [reportHtml, setReportHtml] = useState<string>('');
 
-  // 加载保存的 API Key
+  // 加载保存的配置
   useEffect(() => {
-    const loadApiKey = async () => {
+    const loadSettings = async () => {
       try {
         const savedApiKey = await window.electronAPI.pluginStorage.get(PLUGIN_ID, API_KEY_STORAGE_KEY);
+        const savedProxyUrl = await window.electronAPI.pluginStorage.get(PLUGIN_ID, PROXY_URL_STORAGE_KEY);
+
         if (savedApiKey) {
           setApiKey(savedApiKey);
         }
+        if (savedProxyUrl) {
+          setProxyUrl(savedProxyUrl);
+        }
       } catch (err) {
-        console.error('加载 API Key 失败:', err);
+        console.error('加载配置失败:', err);
       }
     };
-    loadApiKey();
+    loadSettings();
   }, []);
 
-  // 保存 API Key
-  const handleSaveApiKey = async () => {
+  // 保存配置
+  const handleSaveSettings = async () => {
     try {
       await window.electronAPI.pluginStorage.set(PLUGIN_ID, API_KEY_STORAGE_KEY, apiKey);
-      alert('API Key 已保存');
+      await window.electronAPI.pluginStorage.set(PLUGIN_ID, PROXY_URL_STORAGE_KEY, proxyUrl);
+      alert('配置已保存');
     } catch (err) {
-      alert('保存 API Key 失败');
+      alert('保存配置失败');
     }
   };
 
@@ -64,8 +72,8 @@ const YouTubeAnalyzer: React.FC = () => {
     setReportHtml('');
 
     try {
-      // 1. 获取字幕
-      const video = await fetchTranscript(videoUrl);
+      // 1. 获取字幕（使用代理）
+      const video = await fetchTranscript(videoUrl, proxyUrl || undefined);
       setVideoInfo(video);
       setProgress(`字幕获取成功！共 ${video.transcriptItems.length} 条字幕，总计 ${video.transcript.length} 字符`);
 
@@ -146,17 +154,32 @@ const YouTubeAnalyzer: React.FC = () => {
             style={styles.input}
             disabled={status === 'fetching' || status === 'analyzing'}
           />
-          <button
-            onClick={handleSaveApiKey}
-            style={styles.saveButton}
-            disabled={status === 'fetching' || status === 'analyzing'}
-          >
-            保存
-          </button>
         </div>
         <p style={styles.hint}>
           获取 API Key: <a href="https://open.bigmodel.cn/" target="_blank" rel="noopener noreferrer">open.bigmodel.cn</a>
         </p>
+
+        <div style={styles.inputGroup}>
+          <input
+            type="text"
+            value={proxyUrl}
+            onChange={(e) => setProxyUrl(e.target.value)}
+            placeholder="代理地址（可选），例如: http://127.0.0.1:1087"
+            style={styles.input}
+            disabled={status === 'fetching' || status === 'analyzing'}
+          />
+        </div>
+        <p style={styles.hint}>
+          如需访问 YouTube，请配置代理地址（格式: http://host:port）
+        </p>
+
+        <button
+          onClick={handleSaveSettings}
+          style={styles.saveButton}
+          disabled={status === 'fetching' || status === 'analyzing'}
+        >
+          保存配置
+        </button>
       </div>
 
       {/* 视频 URL 输入 */}
