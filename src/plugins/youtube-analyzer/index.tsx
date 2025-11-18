@@ -35,23 +35,31 @@ const YouTubeAnalyzer: React.FC = () => {
 
   // 开始分析
   const handleAnalyze = async () => {
+    console.log('[Plugin] handleAnalyze 被调用');
+    console.log('[Plugin] videoUrl:', videoUrl);
+    console.log('[Plugin] configValid:', configValid);
+
     if (!videoUrl.trim()) {
       setError('请输入 YouTube 视频链接');
       return;
     }
 
     if (!configValid) {
+      console.log('[Plugin] 配置无效，停止执行');
       setError('请先在设置中配置 API Key');
       setShowSettings(true);
       return;
     }
 
+    console.log('[Plugin] 配置有效，开始获取字幕');
     setStatus('fetching');
     setError('');
     setProgress('正在获取视频字幕...');
 
     try {
+      console.log('[Plugin] 读取配置...');
       const config = await HistoryService.getConfig();
+      console.log('[Plugin] 配置读取成功:', { apiKey: config.apiKey ? '已设置' : '未设置', proxyUrl: config.proxyUrl });
 
       // 1. 获取字幕
       const video = await fetchTranscript(videoUrl, config.proxyUrl || undefined);

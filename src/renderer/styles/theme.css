@@ -1,47 +1,47 @@
-/* ToolsHub 主题变量 - Claude.ai/Muset.ai 风格 */
+/* ToolsHub 主题变量 - Muset.ai 浅色风格 */
 
 :root {
-  /* 主背景色 - 温暖深色调 */
-  --bg-primary: #1a1915;
-  --bg-secondary: #21201c;
-  --bg-tertiary: #2a2926;
-  --bg-elevated: #343330;
-  --bg-surface: #3d3c38;
+  /* 主背景色 - 浅灰色调 */
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-surface: #f8f9fa;
 
-  /* 边框色 - 温暖灰调 */
-  --border-subtle: #3a3935;
-  --border-default: #4a4944;
-  --border-focus: #5a5954;
+  /* 边框色 - 浅灰调 */
+  --border-subtle: #e5e5e5;
+  --border-default: #d4d4d4;
+  --border-focus: #a3a3a3;
 
-  /* 文字色 - 温暖白 */
-  --text-primary: #f5f4ef;
-  --text-secondary: #a8a69e;
-  --text-tertiary: #7a786f;
-  --text-disabled: #5a5850;
+  /* 文字色 - 深灰/黑色 */
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --text-disabled: #cccccc;
 
-  /* 强调色 - 橙色/琥珀色 */
-  --accent-primary: #d97706;
-  --accent-hover: #f59e0b;
-  --accent-active: #b45309;
-  --accent-subtle: rgba(217, 119, 6, 0.15);
-  --accent-muted: rgba(217, 119, 6, 0.08);
+  /* 强调色 - 蓝紫色 */
+  --accent-primary: #667eea;
+  --accent-hover: #5568d3;
+  --accent-active: #4c51bf;
+  --accent-subtle: rgba(102, 126, 234, 0.1);
+  --accent-muted: rgba(102, 126, 234, 0.05);
 
   /* 次级强调色 */
-  --accent-secondary: #c084fc;
+  --accent-secondary: #764ba2;
 
   /* 功能色 */
-  --success: #22c55e;
-  --success-bg: rgba(34, 197, 94, 0.15);
-  --warning: #fbbf24;
-  --warning-bg: rgba(251, 191, 36, 0.15);
-  --error: #f87171;
-  --error-bg: rgba(248, 113, 113, 0.15);
-  --info: #60a5fa;
-  --info-bg: rgba(96, 165, 250, 0.15);
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.1);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.1);
+  --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --info: #3b82f6;
+  --info-bg: rgba(59, 130, 246, 0.1);
 
   /* 渐变 */
-  --gradient-primary: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
-  --gradient-subtle: linear-gradient(180deg, rgba(217, 119, 6, 0.1) 0%, rgba(234, 88, 12, 0.05) 100%);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-subtle: linear-gradient(180deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.02) 100%);
 
   /* 字体 */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -76,12 +76,12 @@
   --radius-2xl: 16px;
   --radius-full: 9999px;
 
-  /* 阴影 */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 20px rgba(217, 119, 6, 0.3);
+  /* 阴影 - 浅色主题阴影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
 
   /* 动画 */
   --transition-fast: 0.15s ease;

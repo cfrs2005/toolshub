@@ -360,5 +360,146 @@
 			}
 		],
 		"total": 1
-	}
+	},
+	"config": {
+		"apiKey": "c9d0d753287e437bb9a5b670d147e799.v8WPBcT8yUPYDV9s",
+		"proxyUrl": "http://127.0.0.1:1087"
+	},
+	"interaction_history": [
+		{
+			"id": "1763456585071",
+			"type": "user",
+			"content": "https://www.youtube.com/watch?v=",
+			"timestamp": 1763456585071
+		},
+		{
+			"id": "1763456585072",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763456585071,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763460197100",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40",
+			"timestamp": 1763460197100
+		},
+		{
+			"id": "1763460197101",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763460197100,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763460591375",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40\n",
+			"timestamp": 1763460591375
+		},
+		{
+			"id": "1763460591376",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763460591375,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763460911929",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40",
+			"timestamp": 1763460911929
+		},
+		{
+			"id": "1763460911930",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763460911929,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763461302030",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40\n",
+			"timestamp": 1763461302030
+		},
+		{
+			"id": "1763461302031",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763461302030,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763461476059",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40",
+			"timestamp": 1763461476059
+		},
+		{
+			"id": "1763461476060",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763461476059,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763462287006",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40",
+			"timestamp": 1763462287006
+		},
+		{
+			"id": "1763462287007",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763462287006,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763466767133",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40",
+			"timestamp": 1763466767133
+		},
+		{
+			"id": "1763466767134",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763466767133,
+			"metadata": {
+				"progress": 0
+			}
+		},
+		{
+			"id": "1763466797199",
+			"type": "user",
+			"content": "https://youtube.com/watch?v=sgJ4eXjkk40",
+			"timestamp": 1763466797199
+		},
+		{
+			"id": "1763466797200",
+			"type": "progress",
+			"content": "正在处理...",
+			"timestamp": 1763466797199,
+			"metadata": {
+				"progress": 0
+			}
+		}
+	]
 }

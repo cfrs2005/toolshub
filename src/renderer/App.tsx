@@ -4,18 +4,18 @@ import type { HistoryItem } from './types/history';
 import Sidebar from './components/Sidebar';
 import HistoryGrid from './components/HistoryGrid';
 import Workspace from './components/Workspace';
+import Settings from './pages/Settings';
 import './App.css';
 
 function App() {
-  // 插件和历史数据
   const [plugins, setPlugins] = useState<PluginManifest[]>([]);
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // UI 状态
   const [selectedPluginId, setSelectedPluginId] = useState<string | null>(null);
   const [selectedHistoryId, setSelectedHistoryId] = useState<string | null>(null);
   const [workspaceMode, setWorkspaceMode] = useState<'welcome' | 'new' | 'history'>('welcome');
+  const [showSettings, setShowSettings] = useState(false);
 
   // 加载插件
   useEffect(() => {
@@ -93,18 +93,22 @@ function App() {
     }
   };
 
-  // 返回首页
   const handleHomeClick = () => {
+    setSelectedPluginId(null);
+    setSelectedHistoryId(null);
+    setWorkspaceMode('welcome');
+    setShowSettings(false);
+  };
+
+  const handleSettingsClick = () => {
+    setShowSettings(true);
     setSelectedPluginId(null);
     setSelectedHistoryId(null);
     setWorkspaceMode('welcome');
   };
 
-  // 处理提交
   const handleSubmit = async (pluginId: string, input: string) => {
     console.log(`Plugin ${pluginId} received input: ${input}`);
-    // 这里可以根据不同插件处理不同的逻辑
-    // 实际实现中，这里会调用插件的处理函数
   };
 
   // 获取当前选中的插件
@@ -132,7 +136,6 @@ function App() {
 
   return (
     <div className="app-layout">
-      {/* 左侧导航 */}
       <div className="sidebar-container">
         <Sidebar
           plugins={plugins}
@@ -142,22 +145,24 @@ function App() {
           onPluginSelect={handlePluginSelect}
           onHistorySelect={handleHistorySelect}
           onHomeClick={handleHomeClick}
+          onSettingsClick={handleSettingsClick}
         />
       </div>
 
-      {/* 中间内容区 */}
       <main className="main-content">
-        <div className="content-header">
-          <h1>历史记录</h1>
-          <p className="subtitle">查看和管理你的工作记录</p>
-        </div>
-        <HistoryGrid
-          history={history}
-          onCardClick={handleHistorySelect}
-        />
+        {showSettings ? (
+          <Settings plugins={plugins} />
+        ) : (
+          <>
+            <div className="content-header">
+              <h1>历史记录</h1>
+              <p className="subtitle">查看和管理你的工作记录</p>
+            </div>
+            <HistoryGrid history={history} onCardClick={handleHistorySelect} />
+          </>
+        )}
       </main>
 
-      {/* 右侧工作区 */}
       <div className="workspace-container">
         <Workspace
           plugin={getSelectedPlugin()}

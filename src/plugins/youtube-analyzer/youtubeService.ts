@@ -44,15 +44,27 @@ export function extractVideoId(url: string): string | null {
  * 获取 YouTube 视频的字幕
  */
 export async function fetchTranscript(videoUrl: string, proxyUrl?: string): Promise<VideoInfo> {
+  console.log('[Renderer] fetchTranscript 被调用');
+  console.log('[Renderer] videoUrl:', videoUrl);
+  console.log('[Renderer] proxyUrl:', proxyUrl);
+
   const videoId = extractVideoId(videoUrl);
+  console.log('[Renderer] 提取的 videoId:', videoId);
 
   if (!videoId) {
     throw new Error('无效的 YouTube 视频链接');
   }
 
   try {
+    console.log('[Renderer] 准备调用 window.electronAPI.youtube.fetchTranscript');
+    console.log('[Renderer] window.electronAPI 是否存在:', !!window.electronAPI);
+    console.log('[Renderer] window.electronAPI.youtube 是否存在:', !!window.electronAPI?.youtube);
+    console.log('[Renderer] window.electronAPI.youtube.fetchTranscript 是否存在:', !!window.electronAPI?.youtube?.fetchTranscript);
+
     // 使用主进程的 API 获取字幕（支持代理）
+    console.log('[Renderer] 开始调用 IPC...');
     const transcriptItems = await window.electronAPI.youtube.fetchTranscript(videoId, proxyUrl);
+    console.log('[Renderer] IPC 调用返回，结果长度:', transcriptItems?.length);
 
     if (!transcriptItems || transcriptItems.length === 0) {
       throw new Error('该视频没有可用的字幕');

@@ -11,6 +11,7 @@ interface SidebarProps {
   onPluginSelect: (pluginId: string) => void;
   onHistorySelect: (historyId: string) => void;
   onHomeClick: () => void;
+  onSettingsClick: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -21,6 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onPluginSelect,
   onHistorySelect,
   onHomeClick,
+  onSettingsClick,
 }) => {
   // 格式化相对时间
   const formatRelativeTime = (timestamp: number): string => {
@@ -97,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       {/* 底部设置 */}
       <div className="sidebar-footer">
-        <button className="sidebar-settings">
+        <button className="sidebar-settings" onClick={onSettingsClick}>
           <span className="settings-icon">⚙️</span>
           <span className="settings-label">设置</span>
         </button>

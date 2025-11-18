@@ -148,6 +148,16 @@ export class HistoryService {
    */
   static async getConfig(): Promise<{ apiKey: string; proxyUrl: string }> {
     try {
+      // 优先从全局设置读取（新方式）
+      const globalConfig = await window.electronAPI.pluginStorage.get(PLUGIN_ID, 'config');
+      if (globalConfig && typeof globalConfig === 'object') {
+        return {
+          apiKey: (globalConfig as any).apiKey || '',
+          proxyUrl: (globalConfig as any).proxyUrl || '',
+        };
+      }
+
+      // 兼容旧方式（分开存储）
       const apiKey = (await window.electronAPI.pluginStorage.get(PLUGIN_ID, STORAGE_KEYS.API_KEY)) || '';
       const proxyUrl = (await window.electronAPI.pluginStorage.get(PLUGIN_ID, STORAGE_KEYS.PROXY_URL)) || '';
       return { apiKey, proxyUrl };
