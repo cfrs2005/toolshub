@@ -1,139 +1,229 @@
+/* Sidebar - 温暖深色主题 */
+
 .sidebar {
+  width: 240px;
+  height: 100vh;
+  background: var(--bg-secondary);
   display: flex;
   flex-direction: column;
-  background: #1a1a2e;
-  color: #e0e0e0;
-  height: 100%;
-  overflow: hidden;
+  border-right: 1px solid var(--border-subtle);
+  flex-shrink: 0;
 }
 
-/* 头部 Logo */
+/* Logo 区域 */
 .sidebar-header {
-  padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-3);
   cursor: pointer;
-  padding: 10px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
 }
 
 .logo:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
 }
 
 .logo-icon {
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
 }
 
 .logo-text {
-  font-size: 1.2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
-/* 导航区域 */
-.sidebar-nav {
+/* 工具列表区域 */
+.sidebar-tools {
   flex: 1;
+  padding: var(--space-3);
   overflow-y: auto;
-  padding: 16px 12px;
 }
 
+.sidebar-section-title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-2) var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.tools-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* 导航项 */
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 8px;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s;
-  margin-bottom: 4px;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-  color: white;
+  background: var(--accent-subtle);
+  color: var(--accent-primary);
+  border-left: 2px solid var(--accent-primary);
+  padding-left: calc(var(--space-3) - 2px);
 }
 
 .nav-icon {
-  font-size: 1.1rem;
-  flex-shrink: 0;
+  font-size: var(--text-md);
+  width: 20px;
+  text-align: center;
 }
 
 .nav-label {
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* 分组 */
-.nav-group {
-  margin-bottom: 16px;
+/* 分隔线 */
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0 var(--space-3);
 }
 
-.nav-group-title {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #888;
-  padding: 8px 14px;
-  margin-bottom: 4px;
-}
-
-/* 底部 */
-.sidebar-footer {
-  padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-info {
+/* 历史记录区域 */
+.sidebar-history {
+  flex: 1;
+  padding: var(--space-3);
+  overflow-y: auto;
   display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: #666;
+  flex-direction: column;
 }
 
-/* 滚动条 */
-.sidebar-nav::-webkit-scrollbar {
-  width: 4px;
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  overflow-y: auto;
 }
 
-.sidebar-nav::-webkit-scrollbar-track {
-  background: transparent;
+.history-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-3);
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
 }
 
-.sidebar-nav::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
+/* 历史记录项 */
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-.sidebar-nav::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+.history-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.history-item.active {
+  background: var(--accent-subtle);
+  border-left: 2px solid var(--accent-primary);
+  padding-left: calc(var(--space-3) - 2px);
+}
+
+.history-item-icon {
+  font-size: var(--text-md);
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.history-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-item-title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.history-item-time {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* 底部设置 */
+.sidebar-footer {
+  padding: var(--space-3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.sidebar-settings {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.sidebar-settings:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.settings-icon {
+  font-size: var(--text-md);
+}
+
+.settings-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 /* 响应式 */
 @media (max-width: 1199px) {
   .sidebar {
-    width: 60px !important;
+    width: 60px;
   }
 
   .logo-text,
   .nav-label,
-  .nav-group-title,
-  .footer-info {
+  .settings-label,
+  .sidebar-section-title,
+  .history-item-content {
     display: none;
   }
 
@@ -141,12 +231,23 @@
     justify-content: center;
   }
 
-  .nav-item {
+  .nav-item,
+  .history-item,
+  .sidebar-settings {
     justify-content: center;
-    padding: 12px;
+    padding: var(--space-3);
   }
 
-  .nav-icon {
-    font-size: 1.3rem;
+  .nav-item.active,
+  .history-item.active {
+    padding-left: var(--space-3);
+    border-left: none;
+    border-bottom: 2px solid var(--accent-primary);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
   }
 }

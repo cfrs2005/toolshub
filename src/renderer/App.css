@@ -1,10 +1,11 @@
-/* 三栏式布局 */
+/* App - 三栏式布局（温暖深色主题） */
+
 .app-layout {
   display: flex;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: #f8f9fa;
+  background: var(--bg-primary);
 }
 
 /* 加载状态 */
@@ -15,21 +16,28 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #667eea;
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-default);
+  border-top: 3px solid var(--accent-primary);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: var(--space-4);
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
 }
 
 /* 左侧导航栏 */
@@ -44,107 +52,46 @@
   flex: 1;
   height: 100%;
   overflow-y: auto;
-  padding: 0;
   min-width: 0;
+  background: var(--bg-primary);
 }
 
-/* 右侧交互区 */
-.interaction-container {
-  width: 0;
+/* 右侧工作区 */
+.workspace-container {
+  width: 480px;
   flex-shrink: 0;
   height: 100%;
-  overflow: hidden;
-  transition: width 0.3s ease;
-}
-
-.interaction-container.active {
-  width: 360px;
 }
 
 /* 内容头部 */
 .content-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 40px 30px;
-  text-align: center;
+  background: var(--bg-secondary);
+  padding: var(--space-6) var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .content-header h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  font-weight: 700;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
 }
 
 .subtitle {
-  font-size: 1rem;
-  opacity: 0.9;
-}
-
-/* 空状态 */
-.empty-state {
-  text-align: center;
-  padding: 80px 20px;
-  color: #666;
-}
-
-.empty-state .empty-icon {
-  font-size: 64px;
-  margin-bottom: 20px;
-}
-
-.empty-state p {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.empty-state small {
-  color: #999;
-}
-
-/* Widget 区域样式 */
-.widgets-section {
-  padding: 30px;
-  margin-bottom: 0;
-}
-
-.plugins-section {
-  padding: 0 30px 30px;
-}
-
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid #667eea;
-}
-
-.widgets-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 25px;
-}
-
-.widget-container {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
 }
 
 /* 响应式布局 */
+@media (max-width: 1600px) {
+  .workspace-container {
+    width: 420px;
+  }
+}
+
 @media (max-width: 1400px) {
-  .interaction-container.active {
-    width: 320px;
+  .workspace-container {
+    width: 380px;
   }
 }
 
@@ -153,18 +100,20 @@
     width: 60px;
   }
 
-  .interaction-container {
+  .workspace-container {
     position: fixed;
     right: 0;
     top: 0;
     height: 100vh;
-    background: #fff;
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    width: 420px;
+    box-shadow: var(--shadow-xl);
     z-index: 100;
+    transform: translateX(100%);
+    transition: transform var(--transition-normal);
   }
 
-  .interaction-container.active {
-    width: 360px;
+  .workspace-container.active {
+    transform: translateX(0);
   }
 }
 
@@ -173,42 +122,15 @@
     display: none;
   }
 
-  .widgets-grid {
-    grid-template-columns: 1fr;
+  .content-header {
+    padding: var(--space-4);
   }
 
   .content-header h1 {
-    font-size: 1.5rem;
+    font-size: var(--text-lg);
   }
 
-  .section-title {
-    font-size: 1.2rem;
-  }
-
-  .widgets-section,
-  .plugins-section {
-    padding: 20px;
-  }
-
-  .interaction-container.active {
+  .workspace-container {
     width: 100%;
   }
-}
-
-/* 滚动条样式 */
-.main-content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.main-content::-webkit-scrollbar-track {
-  background: #f0f0f0;
-}
-
-.main-content::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
-}
-
-.main-content::-webkit-scrollbar-thumb:hover {
-  background: #bbb;
 }

@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import type { PluginManifest } from '../shared/types';
+import type { HistoryItem } from './types/history';
 import Sidebar from './components/Sidebar';
-import PluginList from './components/PluginList';
-import PluginView from './components/PluginView';
-import PluginInteractionPanel from './components/PluginInteractionPanel';
-import { getWidgetComponent } from './pluginRegistry';
+import HistoryGrid from './components/HistoryGrid';
+import Workspace from './components/Workspace';
 import './App.css';
 
 function App() {
+  // 插件和历史数据
   const [plugins, setPlugins] = useState<PluginManifest[]>([]);
-  const [selectedPlugin, setSelectedPlugin] = useState<string | null>(null);
-  const [interactionPlugin, setInteractionPlugin] = useState<PluginManifest | null>(null);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeView, setActiveView] = useState<'home' | 'plugin'>('home');
 
+  // UI 状态
+  const [selectedPluginId, setSelectedPluginId] = useState<string | null>(null);
+  const [selectedHistoryId, setSelectedHistoryId] = useState<string | null>(null);
+  const [workspaceMode, setWorkspaceMode] = useState<'welcome' | 'new' | 'history'>('welcome');
+
+  // 加载插件
   useEffect(() => {
     loadPlugins();
+    loadAllHistory();
   }, []);
 
   const loadPlugins = async () => {
@@ -29,30 +34,89 @@ function App() {
     }
   };
 
-  const handlePluginSelect = (pluginId: string) => {
-    setSelectedPlugin(pluginId);
-    setActiveView('plugin');
-
-    // 同时在右侧面板显示交互界面
-    const plugin = plugins.find((p) => p.id === pluginId);
-    if (plugin) {
-      setInteractionPlugin(plugin);
+  // 加载所有历史记录
+  const loadAllHistory = async () => {
+    try {
+      // 从全局存储加载历史
+      const globalHistory = await window.electronAPI.pluginStorage.get('global', 'all_history');
+      if (globalHistory && Array.isArray(globalHistory)) {
+        // 按时间倒序排序
+        const sorted = globalHistory.sort((a: HistoryItem, b: HistoryItem) => b.timestamp - a.timestamp);
+        setHistory(sorted);
+      }
+    } catch (error) {
+      console.error('Failed to load history:', error);
     }
   };
 
-  const handleBackToHome = () => {
-    setSelectedPlugin(null);
-    setActiveView('home');
+  // 保存历史记录
+  const saveHistoryItem = async (item: Omit<HistoryItem, 'id' | 'timestamp'>) => {
+    const newItem: HistoryItem = {
+      ...item,
+      id: Date.now().toString(),
+      timestamp: Date.now(),
+    };
+
+    const newHistory = [newItem, ...history];
+    setHistory(newHistory);
+
+    try {
+      // 保存到全局存储
+      await window.electronAPI.pluginStorage.set('global', 'all_history', newHistory);
+      // 同时保存到插件存储
+      await window.electronAPI.pluginStorage.set(
+        item.pluginId,
+        `history:${newItem.id}`,
+        newItem
+      );
+    } catch (error) {
+      console.error('Failed to save history:', error);
+    }
+
+    return newItem;
   };
 
-  const handleInteractionClose = () => {
-    setInteractionPlugin(null);
+  // 点击工具
+  const handlePluginSelect = (pluginId: string) => {
+    setSelectedPluginId(pluginId);
+    setSelectedHistoryId(null);
+    setWorkspaceMode('new');
   };
 
-  const handleInteractionSubmit = (pluginId: string, input: string) => {
-    // 处理交互输入
+  // 点击历史记录
+  const handleHistorySelect = (historyId: string) => {
+    const item = history.find(h => h.id === historyId);
+    if (item) {
+      setSelectedPluginId(item.pluginId);
+      setSelectedHistoryId(historyId);
+      setWorkspaceMode('history');
+    }
+  };
+
+  // 返回首页
+  const handleHomeClick = () => {
+    setSelectedPluginId(null);
+    setSelectedHistoryId(null);
+    setWorkspaceMode('welcome');
+  };
+
+  // 处理提交
+  const handleSubmit = async (pluginId: string, input: string) => {
     console.log(`Plugin ${pluginId} received input: ${input}`);
     // 这里可以根据不同插件处理不同的逻辑
+    // 实际实现中，这里会调用插件的处理函数
+  };
+
+  // 获取当前选中的插件
+  const getSelectedPlugin = (): PluginManifest | null => {
+    if (!selectedPluginId) return null;
+    return plugins.find(p => p.id === selectedPluginId) || null;
+  };
+
+  // 获取当前选中的历史记录
+  const getSelectedHistoryItem = (): HistoryItem | null => {
+    if (!selectedHistoryId) return null;
+    return history.find(h => h.id === selectedHistoryId) || null;
   };
 
   if (loading) {
@@ -60,15 +124,11 @@ function App() {
       <div className="app-layout">
         <div className="loading-container">
           <div className="spinner"></div>
-          <p>加载工具中...</p>
+          <p>加载中...</p>
         </div>
       </div>
     );
   }
-
-  // 获取有 widget 的插件
-  const pluginsWithWidgets = plugins.filter((p) => p.widget && getWidgetComponent(p.id));
-  const hasWidgets = pluginsWithWidgets.length > 0;
 
   return (
     <div className="app-layout">
@@ -76,69 +136,35 @@ function App() {
       <div className="sidebar-container">
         <Sidebar
           plugins={plugins}
-          selectedPlugin={selectedPlugin}
+          history={history}
+          selectedPluginId={selectedPluginId}
+          selectedHistoryId={selectedHistoryId}
           onPluginSelect={handlePluginSelect}
-          activeView={activeView}
-          onHomeClick={handleBackToHome}
+          onHistorySelect={handleHistorySelect}
+          onHomeClick={handleHomeClick}
         />
       </div>
 
-      {/* 中间主内容区 */}
+      {/* 中间内容区 */}
       <main className="main-content">
-        {activeView === 'plugin' && selectedPlugin ? (
-          <PluginView pluginId={selectedPlugin} onBack={handleBackToHome} />
-        ) : (
-          <>
-            {/* 头部 */}
-            <header className="content-header">
-              <h1>欢迎使用 ToolsHub</h1>
-              <p className="subtitle">跨平台工具集</p>
-            </header>
-
-            {plugins.length === 0 ? (
-              <div className="empty-state">
-                <div className="empty-icon">📦</div>
-                <p>暂无工具</p>
-                <small>请将工具插件放入插件目录</small>
-              </div>
-            ) : (
-              <>
-                {/* Widget 展示区域 */}
-                {hasWidgets && (
-                  <section className="widgets-section">
-                    <h2 className="section-title">📊 活动面板</h2>
-                    <div className="widgets-grid">
-                      {pluginsWithWidgets.map((plugin) => {
-                        const WidgetComponent = getWidgetComponent(plugin.id);
-                        if (!WidgetComponent) return null;
-
-                        return (
-                          <div key={plugin.id} className="widget-container">
-                            <WidgetComponent pluginId={plugin.id} onNavigate={handlePluginSelect} />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </section>
-                )}
-
-                {/* 插件列表 */}
-                <section className="plugins-section">
-                  <h2 className="section-title">🔌 所有工具</h2>
-                  <PluginList plugins={plugins} onSelect={handlePluginSelect} />
-                </section>
-              </>
-            )}
-          </>
-        )}
+        <div className="content-header">
+          <h1>历史记录</h1>
+          <p className="subtitle">查看和管理你的工作记录</p>
+        </div>
+        <HistoryGrid
+          history={history}
+          onCardClick={handleHistorySelect}
+        />
       </main>
 
-      {/* 右侧交互区 */}
-      <div className={`interaction-container ${interactionPlugin ? 'active' : ''}`}>
-        <PluginInteractionPanel
-          plugin={interactionPlugin}
-          onClose={handleInteractionClose}
-          onSubmit={handleInteractionSubmit}
+      {/* 右侧工作区 */}
+      <div className="workspace-container">
+        <Workspace
+          plugin={getSelectedPlugin()}
+          historyItem={getSelectedHistoryItem()}
+          mode={workspaceMode}
+          onSubmit={handleSubmit}
+          onSaveHistory={saveHistoryItem}
         />
       </div>
     </div>
