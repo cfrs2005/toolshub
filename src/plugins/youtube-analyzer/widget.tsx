@@ -7,6 +7,20 @@ import { WidgetProps } from '@shared/types/plugin';
 import { HistoryService } from './historyService';
 import { AnalysisHistory } from './types';
 
+// YouTube SVG 图标
+const YouTubeIcon = () => (
+  <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '64px', height: '64px' }}>
+    <rect width="64" height="64" rx="12" fill="url(#yt-widget-grad)" />
+    <path d="M42 32L26 42V22L42 32Z" fill="white" />
+    <defs>
+      <linearGradient id="yt-widget-grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#FF0000" />
+        <stop offset="1" stopColor="#CC0000" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
 const YouTubeWidget: React.FC<WidgetProps> = ({ pluginId, onNavigate }) => {
   const [history, setHistory] = useState<AnalysisHistory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,7 +61,12 @@ const YouTubeWidget: React.FC<WidgetProps> = ({ pluginId, onNavigate }) => {
     return (
       <div style={styles.widget}>
         <div style={styles.header}>
-          <h3 style={styles.title}>🎬 YouTube 视频分析</h3>
+          <div style={styles.headerLeft}>
+            <h3 style={styles.title}>YouTube 视频分析</h3>
+          </div>
+          <div style={styles.headerIcon}>
+            <YouTubeIcon />
+          </div>
         </div>
         <div style={styles.loading}>加载中...</div>
       </div>
@@ -58,8 +77,13 @@ const YouTubeWidget: React.FC<WidgetProps> = ({ pluginId, onNavigate }) => {
     return (
       <div style={styles.widget}>
         <div style={styles.header}>
-          <h3 style={styles.title}>🎬 YouTube 视频分析</h3>
-          <p style={styles.subtitle}>AI 驱动的视频内容深度分析</p>
+          <div style={styles.headerLeft}>
+            <h3 style={styles.title}>YouTube 视频分析</h3>
+            <p style={styles.subtitle}>AI 驱动的视频内容深度分析</p>
+          </div>
+          <div style={styles.headerIcon}>
+            <YouTubeIcon />
+          </div>
         </div>
         <div style={styles.empty} onClick={handleCardClick}>
           <p style={styles.emptyIcon}>📭</p>
@@ -73,10 +97,15 @@ const YouTubeWidget: React.FC<WidgetProps> = ({ pluginId, onNavigate }) => {
   return (
     <div style={styles.widget}>
       <div style={styles.header}>
-        <h3 style={styles.title}>🎬 YouTube 视频分析</h3>
-        <button onClick={handleCardClick} style={styles.moreButton}>
-          查看全部 →
-        </button>
+        <div style={styles.headerLeft}>
+          <h3 style={styles.title}>YouTube 视频分析</h3>
+          <button onClick={handleCardClick} style={styles.moreButton}>
+            查看全部 →
+          </button>
+        </div>
+        <div style={styles.headerIcon}>
+          <YouTubeIcon />
+        </div>
       </div>
 
       <div style={styles.gallery}>
@@ -134,24 +163,33 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: '12px',
     padding: '20px',
     boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    border: '1px solid #e0e0e0',
+    transition: 'box-shadow 0.3s, transform 0.3s',
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: '20px',
     paddingBottom: '15px',
     borderBottom: '2px solid #f0f0f0',
   },
+  headerLeft: {
+    flex: 1,
+  },
+  headerIcon: {
+    flexShrink: 0,
+    marginLeft: '16px',
+  },
   title: {
     fontSize: '1.3em',
-    margin: 0,
+    margin: '0 0 8px 0',
     color: '#2c3e50',
     fontWeight: 'bold',
   },
   subtitle: {
     fontSize: '0.9em',
-    margin: '5px 0 0 0',
+    margin: 0,
     color: '#6c757d',
   },
   moreButton: {
@@ -164,6 +202,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: '0.9em',
     fontWeight: 'bold',
     transition: 'all 0.3s',
+    marginTop: '8px',
   },
   loading: {
     textAlign: 'center',
@@ -199,7 +238,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   gallery: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
     gap: '15px',
     marginBottom: '15px',
   },
@@ -213,7 +252,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   cardThumbnail: {
     position: 'relative',
     width: '100%',
-    height: '120px',
+    height: '100px',
     background: '#e0e0e0',
     overflow: 'hidden',
   },
@@ -228,7 +267,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '3em',
+    fontSize: '2.5em',
     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
   },
   cardOverlay: {
@@ -245,20 +284,20 @@ const styles: { [key: string]: React.CSSProperties } = {
     transition: 'opacity 0.3s',
   },
   previewButton: {
-    padding: '8px 16px',
+    padding: '6px 12px',
     background: 'white',
     border: 'none',
     borderRadius: '6px',
     cursor: 'pointer',
-    fontSize: '0.9em',
+    fontSize: '0.85em',
     fontWeight: 'bold',
   },
   cardContent: {
-    padding: '12px',
+    padding: '10px',
   },
   cardTitle: {
-    fontSize: '0.95em',
-    margin: '0 0 6px 0',
+    fontSize: '0.9em',
+    margin: '0 0 4px 0',
     color: '#2c3e50',
     fontWeight: 'bold',
     overflow: 'hidden',
@@ -266,14 +305,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     whiteSpace: 'nowrap',
   },
   cardMeta: {
-    fontSize: '0.8em',
+    fontSize: '0.75em',
     color: '#6c757d',
-    margin: '0 0 8px 0',
+    margin: '0 0 6px 0',
   },
   cardSummary: {
-    fontSize: '0.85em',
+    fontSize: '0.8em',
     color: '#495057',
-    margin: '0 0 10px 0',
+    margin: '0 0 8px 0',
     lineHeight: 1.4,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -283,8 +322,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   cardStats: {
     display: 'flex',
-    gap: '10px',
-    fontSize: '0.8em',
+    gap: '8px',
+    fontSize: '0.75em',
   },
   stat: {
     color: '#667eea',
