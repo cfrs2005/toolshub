@@ -2,7 +2,7 @@
   "name": "toolshub",
   "version": "1.0.0",
   "description": "Cross-platform tools hub framework",
-  "main": "dist/main/main/index.js",
+  "main": "dist/main/index.js",
   "author": "ToolsHub Team",
   "license": "MIT",
   "scripts": {

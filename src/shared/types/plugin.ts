@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react';
+
 /**
  * 插件元数据定义
  */
@@ -48,9 +50,9 @@ export interface Plugin {
   /** 插件停用时调用 */
   deactivate(): Promise<void>;
   /** 渲染插件 UI */
-  render(): React.ComponentType;
+  render(): ComponentType;
   /** 渲染 Widget 组件 (可选) */
-  renderWidget?(): React.ComponentType<WidgetProps>;
+  renderWidget?(): ComponentType<WidgetProps>;
 }
 
 /**
