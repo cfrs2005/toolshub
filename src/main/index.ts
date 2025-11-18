@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, IpcMainInvokeEvent } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 import { PluginLoader } from './plugin-loader';
@@ -107,52 +107,52 @@ app.on('before-quit', async () => {
  */
 
 // 获取所有插件列表
-ipcMain.handle('get-plugins', async () => {
+ipcMain.handle('get-plugins', async (_event: IpcMainInvokeEvent) => {
   return pluginLoader.getPlugins();
 });
 
 // 获取单个插件信息
-ipcMain.handle('get-plugin', async (_, pluginId: string) => {
+ipcMain.handle('get-plugin', async (_event: IpcMainInvokeEvent, pluginId: string) => {
   return pluginLoader.getPlugin(pluginId);
 });
 
 // 激活插件
-ipcMain.handle('activate-plugin', async (_, pluginId: string) => {
+ipcMain.handle('activate-plugin', async (_event: IpcMainInvokeEvent, pluginId: string) => {
   return pluginLoader.activatePlugin(pluginId);
 });
 
 // 停用插件
-ipcMain.handle('deactivate-plugin', async (_, pluginId: string) => {
+ipcMain.handle('deactivate-plugin', async (_event: IpcMainInvokeEvent, pluginId: string) => {
   return pluginLoader.deactivatePlugin(pluginId);
 });
 
 // 插件存储操作
-ipcMain.handle('plugin-storage-get', async (_, pluginId: string, key: string) => {
+ipcMain.handle('plugin-storage-get', async (_event: IpcMainInvokeEvent, pluginId: string, key: string) => {
   return pluginLoader.getPluginStorage(pluginId, key);
 });
 
-ipcMain.handle('plugin-storage-set', async (_, pluginId: string, key: string, value: any) => {
+ipcMain.handle('plugin-storage-set', async (_event: IpcMainInvokeEvent, pluginId: string, key: string, value: any) => {
   return pluginLoader.setPluginStorage(pluginId, key, value);
 });
 
-ipcMain.handle('plugin-storage-delete', async (_, pluginId: string, key: string) => {
+ipcMain.handle('plugin-storage-delete', async (_event: IpcMainInvokeEvent, pluginId: string, key: string) => {
   return pluginLoader.deletePluginStorage(pluginId, key);
 });
 
-ipcMain.handle('plugin-storage-clear', async (_, pluginId: string) => {
+ipcMain.handle('plugin-storage-clear', async (_event: IpcMainInvokeEvent, pluginId: string) => {
   return pluginLoader.clearPluginStorage(pluginId);
 });
 
-ipcMain.handle('plugin-storage-has', async (_, pluginId: string, key: string) => {
+ipcMain.handle('plugin-storage-has', async (_event: IpcMainInvokeEvent, pluginId: string, key: string) => {
   return pluginLoader.hasPluginStorage(pluginId, key);
 });
 
-ipcMain.handle('plugin-storage-keys', async (_, pluginId: string) => {
+ipcMain.handle('plugin-storage-keys', async (_event: IpcMainInvokeEvent, pluginId: string) => {
   return pluginLoader.getPluginStorageKeys(pluginId);
 });
 
 // YouTube 字幕获取（支持代理）
-ipcMain.handle('youtube-fetch-transcript', async (_, videoId: string, proxyUrl?: string) => {
+ipcMain.handle('youtube-fetch-transcript', async (_event: IpcMainInvokeEvent, videoId: string, proxyUrl?: string) => {
   log(`========== YouTube 字幕获取请求 ==========`);
   log(`视频ID: ${videoId}`);
   log(`代理地址: ${proxyUrl || '未配置'}`);
