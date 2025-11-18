@@ -6,6 +6,8 @@
   "author": "ToolsHub Team",
   "icon": "🎬",
   "entry": "index.tsx",
+  "widget": "widget.tsx",
+  "widgetStyle": "gallery",
   "type": "tool",
   "permissions": ["network", "file-system"]
 }

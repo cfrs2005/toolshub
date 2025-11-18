@@ -16,6 +16,10 @@ export interface PluginManifest {
   icon?: string;
   /** 插件入口文件 */
   entry: string;
+  /** Widget 组件文件 (可选) - 用于在首页展示插件摘要 */
+  widget?: string;
+  /** Widget 展示样式 (可选) */
+  widgetStyle?: 'gallery' | 'list' | 'card';
   /** 插件类型 */
   type: 'tool' | 'service' | 'widget';
   /** 插件所需权限 */
@@ -45,6 +49,18 @@ export interface Plugin {
   deactivate(): Promise<void>;
   /** 渲染插件 UI */
   render(): React.ComponentType;
+  /** 渲染 Widget 组件 (可选) */
+  renderWidget?(): React.ComponentType<WidgetProps>;
+}
+
+/**
+ * Widget 组件属性
+ */
+export interface WidgetProps {
+  /** 插件 ID */
+  pluginId: string;
+  /** 点击 Widget 时的回调 */
+  onNavigate?: (pluginId: string) => void;
 }
 
 /**
