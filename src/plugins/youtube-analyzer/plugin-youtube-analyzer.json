@@ -1,4 +1,364 @@
 {
 	"bigmodel_api_key": "c9d0d753287e437bb9a5b670d147e799.v8WPBcT8yUPYDV9s",
-	"proxy_url": "http://127.0.0.1:1087"
+	"proxy_url": "http://127.0.0.1:1087",
+	"analysis_history": {
+		"items": [
+			{
+				"id": "1763438792438-ZQjZqQjtpz0",
+				"timestamp": 1763438792438,
+				"videoInfo": {
+					"videoId": "ZQjZqQjtpz0",
+					"url": "https://www.youtube.com/watch?v=ZQjZqQjtpz0",
+					"transcript": "how to add subtitles or closed captions to your YouTube videos on autopilot I'm going to show you the quick and easy way to do this so it doesn't take too much time and you have those subtitles on your videos all correct so to get started let's jump onto the laptop we're going to head up to our channel on the top right hand side we're going to head inside of YouTube studio and then we're going to head into our content now select the video that you want to add the subtitles too you can click on the details there and then what we're going to do is down the left hand side we're going to head down to subtitles just below the comments section now we have English already set for the channel but if you don't have that yet you can click on ADD language and select the language that you would like to add we've got English Australian English Canada English India English Ireland English United Kingdom and English United States I don't know why we don't have an English for South Africa just yet and then it's always a good idea to head in here duplicate and edit just to check if there were any mistakes made on the automatically generated subtitles so I like to head into here we can go edit timings so then it breaks it up and makes it easier to manage and then you can go through word by word and play your video out to check if there are any mistakes if you do find any mistakes all all you need to do is head inside of that box so if grow was a mistake we could head in here and we could change that to whatever we would like and you'll see it will automatically update in the subtitles here once you've gone through your video and made all the corrections you can head up to the top right hand side and click on that publish button and then you're all done with your subtitles for your video if you have any questions or queries about how this works or you get stuck along the way let us know in the comment section down below and we'll be happy to help you out if you're interested in growing and accelerating the growth of your YouTube channel then we've got a community of new small YouTubers that you can join so that we can all grow together if you're interested in that I'll leave a link for you in the description down below now if you haven't found the right Niche for your YouTube channel then I've made a video that will make it quick and easy for you to find the right Focus so that you can grow your YouTube channel you can watch that video right here",
+					"transcriptItems": [
+						{
+							"text": "how to add subtitles or closed captions",
+							"offset": 40,
+							"duration": 2839
+						},
+						{
+							"text": "to your YouTube videos on autopilot I'm",
+							"offset": 2879,
+							"duration": 3241
+						},
+						{
+							"text": "going to show you the quick and easy way",
+							"offset": 6120,
+							"duration": 2240
+						},
+						{
+							"text": "to do this so it doesn't take too much",
+							"offset": 8360,
+							"duration": 2239
+						},
+						{
+							"text": "time and you have those subtitles on",
+							"offset": 10599,
+							"duration": 2481
+						},
+						{
+							"text": "your videos all correct so to get",
+							"offset": 13080,
+							"duration": 2439
+						},
+						{
+							"text": "started let's jump onto the laptop we're",
+							"offset": 15519,
+							"duration": 2081
+						},
+						{
+							"text": "going to head up to our channel on the",
+							"offset": 17600,
+							"duration": 1920
+						},
+						{
+							"text": "top right hand side we're going to head",
+							"offset": 19520,
+							"duration": 2160
+						},
+						{
+							"text": "inside of YouTube studio and then we're",
+							"offset": 21680,
+							"duration": 2560
+						},
+						{
+							"text": "going to head into our content now",
+							"offset": 24240,
+							"duration": 2799
+						},
+						{
+							"text": "select the video that you want to add",
+							"offset": 27039,
+							"duration": 2681
+						},
+						{
+							"text": "the subtitles too you can click on the",
+							"offset": 29720,
+							"duration": 2480
+						},
+						{
+							"text": "details there and then what we're going",
+							"offset": 32200,
+							"duration": 1840
+						},
+						{
+							"text": "to do is down the left hand side we're",
+							"offset": 34040,
+							"duration": 2240
+						},
+						{
+							"text": "going to head down to subtitles just",
+							"offset": 36280,
+							"duration": 2599
+						},
+						{
+							"text": "below the comments section now we have",
+							"offset": 38879,
+							"duration": 2601
+						},
+						{
+							"text": "English already set for the channel but",
+							"offset": 41480,
+							"duration": 3000
+						},
+						{
+							"text": "if you don't have that yet you can click",
+							"offset": 44480,
+							"duration": 2320
+						},
+						{
+							"text": "on ADD language and select the language",
+							"offset": 46800,
+							"duration": 3279
+						},
+						{
+							"text": "that you would like to add we've got",
+							"offset": 50079,
+							"duration": 2320
+						},
+						{
+							"text": "English Australian English Canada",
+							"offset": 52399,
+							"duration": 2000
+						},
+						{
+							"text": "English India English Ireland English",
+							"offset": 54399,
+							"duration": 2561
+						},
+						{
+							"text": "United Kingdom and English United States",
+							"offset": 56960,
+							"duration": 2480
+						},
+						{
+							"text": "I don't know why we don't have an",
+							"offset": 59440,
+							"duration": 1240
+						},
+						{
+							"text": "English for South Africa just yet and",
+							"offset": 60680,
+							"duration": 2120
+						},
+						{
+							"text": "then it's always a good idea to head in",
+							"offset": 62800,
+							"duration": 2078
+						},
+						{
+							"text": "here duplicate and edit just to check if",
+							"offset": 64879,
+							"duration": 2761
+						},
+						{
+							"text": "there were any mistakes made on the",
+							"offset": 67640,
+							"duration": 2280
+						},
+						{
+							"text": "automatically generated subtitles so I",
+							"offset": 69920,
+							"duration": 3199
+						},
+						{
+							"text": "like to head into here we can go edit",
+							"offset": 73119,
+							"duration": 2640
+						},
+						{
+							"text": "timings so then it breaks it up and",
+							"offset": 75759,
+							"duration": 2000
+						},
+						{
+							"text": "makes it easier to manage and then you",
+							"offset": 77759,
+							"duration": 2561
+						},
+						{
+							"text": "can go through word by word and play",
+							"offset": 80320,
+							"duration": 2839
+						},
+						{
+							"text": "your video out to check if there are any",
+							"offset": 83159,
+							"duration": 3280
+						},
+						{
+							"text": "mistakes if you do find any mistakes all",
+							"offset": 86439,
+							"duration": 3481
+						},
+						{
+							"text": "all you need to do is head inside of",
+							"offset": 89920,
+							"duration": 2680
+						},
+						{
+							"text": "that box so if grow was a mistake we",
+							"offset": 92600,
+							"duration": 3280
+						},
+						{
+							"text": "could head in here and we could change",
+							"offset": 95880,
+							"duration": 2640
+						},
+						{
+							"text": "that to whatever we would like and",
+							"offset": 98520,
+							"duration": 2520
+						},
+						{
+							"text": "you'll see it will automatically update",
+							"offset": 101040,
+							"duration": 2960
+						},
+						{
+							"text": "in the subtitles here once you've gone",
+							"offset": 104000,
+							"duration": 3479
+						},
+						{
+							"text": "through your video and made all the",
+							"offset": 107479,
+							"duration": 1361
+						},
+						{
+							"text": "corrections you can head up to the top",
+							"offset": 108840,
+							"duration": 1760
+						},
+						{
+							"text": "right hand side and click on that",
+							"offset": 110600,
+							"duration": 2479
+						},
+						{
+							"text": "publish button and then you're all done",
+							"offset": 113079,
+							"duration": 2201
+						},
+						{
+							"text": "with your subtitles for your video if",
+							"offset": 115280,
+							"duration": 2519
+						},
+						{
+							"text": "you have any questions or queries about",
+							"offset": 117799,
+							"duration": 2161
+						},
+						{
+							"text": "how this works or you get stuck along",
+							"offset": 119960,
+							"duration": 1720
+						},
+						{
+							"text": "the way let us know in the comment",
+							"offset": 121680,
+							"duration": 1560
+						},
+						{
+							"text": "section down below and we'll be happy to",
+							"offset": 123240,
+							"duration": 2080
+						},
+						{
+							"text": "help you out if you're interested in",
+							"offset": 125320,
+							"duration": 1920
+						},
+						{
+							"text": "growing and accelerating the growth of",
+							"offset": 127240,
+							"duration": 2239
+						},
+						{
+							"text": "your YouTube channel then we've got a",
+							"offset": 129479,
+							"duration": 1881
+						},
+						{
+							"text": "community of new small YouTubers that",
+							"offset": 131360,
+							"duration": 2560
+						},
+						{
+							"text": "you can join so that we can all grow",
+							"offset": 133920,
+							"duration": 2640
+						},
+						{
+							"text": "together if you're interested in that",
+							"offset": 136560,
+							"duration": 1480
+						},
+						{
+							"text": "I'll leave a link for you in the",
+							"offset": 138040,
+							"duration": 1320
+						},
+						{
+							"text": "description down below now if you",
+							"offset": 139360,
+							"duration": 1920
+						},
+						{
+							"text": "haven't found the right Niche for your",
+							"offset": 141280,
+							"duration": 1920
+						},
+						{
+							"text": "YouTube channel then I've made a video",
+							"offset": 143200,
+							"duration": 2039
+						},
+						{
+							"text": "that will make it quick and easy for you",
+							"offset": 145239,
+							"duration": 1961
+						},
+						{
+							"text": "to find the right Focus so that you can",
+							"offset": 147200,
+							"duration": 2319
+						},
+						{
+							"text": "grow your YouTube channel you can watch",
+							"offset": 149519,
+							"duration": 1921
+						},
+						{
+							"text": "that video right here",
+							"offset": 151440,
+							"duration": 3280
+						}
+					]
+				},
+				"analysisResult": {
+					"summary": "```markdown\n# 如何自动为YouTube视频添加字幕\n\n## 视频主要内容\n本视频教程展示了如何在YouTube上为视频自动添加并编辑字幕，确保字幕的正确性，而无需花费太多时间。\n\n## 核心观点\n- 自动生成的字幕可能存在错误，需要手动检查和编辑。\n- YouTube提供了多种语言的字幕选项。\n- 通过编辑字幕时间轴，可以更方便地管理字幕。\n\n## 视频逻辑结构\n\n### 1. 登录YouTube Studio\n- 打开电脑，进入YouTube Studio。\n- 点击右上角的个人频道图标，进入YouTube Studio。\n\n### 2. 选择视频\n- 在“内容”选项卡中，选择你想要添加字幕的视频。\n\n### 3. 添加字幕语言\n- 在视频详情页面左侧，找到“字幕”选项（位于评论部分下方）。\n- 如果还没有设置字幕语言，可以点击“添加语言”并选择所需语言。\n\n### 4. 字幕编辑\n- 视频已默认设置英语字幕，但提供多种英语方言选项，如澳大利亚英语、加拿大英语等。\n- 建议复制并编辑自动生成的字幕，以检查错误。\n- 可以通过编辑时间轴来拆分字幕，便于管理。\n- 逐字播放视频，检查字幕是否有误。\n\n### 5. 错误修正\n- 如果发现错误，可以直接在文本框中修改，字幕会自动更新。\n\n### 6. 发布字幕\n- 完成所有修正后，点击右上角的“发布”按钮。\n\n### 7. 求助与社区加入\n- 如果有任何问题或疑问，可以在评论区留言，创作者会提供帮助。\n- 如果有兴趣加入YouTube频道增长社区，可以查看视频描述中的链接。\n\n### 8. 相关视频推荐\n- 如果还没有找到适合自己YouTube频道的定位，可以观看创作者提供的另一个视频，帮助快速找到正确的方向。\n```\n",
+					"mindMap": "```\n- Adding Subtitles to YouTube Videos\n  - Accessing YouTube Studio\n    - Navigate to channel\n    - Open YouTube Studio\n    - Select 'Content'\n  - Selecting Video\n    - Choose video for subtitles\n    - Click on 'Details'\n  - Managing Subtitles\n    - Navigate to 'Subtitles'\n    - Add language (if needed)\n    - Duplicate and edit subtitles\n  - Editing Subtitles\n    - Edit timings\n    - Check for mistakes\n    - Correct mistakes\n  - Publishing\n    - Click 'Publish'\n  - Support and Community\n    - Comment with questions\n    - Join small YouTubers community\n    - Find the right niche\n```",
+					"keyPoints": [
+						"自动添加字幕或闭路字幕到YouTube视频的快速简便方法。",
+						"通过YouTube工作室为视频添加字幕。",
+						"可以选择多种英语方言为字幕语言。",
+						"建议复制并编辑自动生成的字幕以检查错误。",
+						"可以逐字编辑时间轴以便更好地管理字幕。",
+						"发现错误时可以直接在框内修正。",
+						"完成修正后点击发布按钮完成字幕添加。",
+						"如有问题可以在评论区提问获得帮助。",
+						"加入社区以加速YouTube频道增长。",
+						"寻找合适的内容定位以助频道增长。"
+					],
+					"insights": "```markdown\n# 深度分析：如何自动为YouTube视频添加字幕\n\n## 1. 内容的深层含义和价值\n\n### 深层含义：\n这段字幕内容主要介绍了一种快速且简便的方法，帮助用户自动为YouTube视频添加字幕。深层含义在于提高视频的可访问性和观众体验，同时节省创作者的时间。\n\n### 价值：\n- **提升可访问性**：字幕使得听力受损的观众也能理解视频内容，增加了视频的包容性。\n- **优化观众体验**：字幕可以帮助观众在嘈杂环境或无法开启声音的情况下观看视频。\n- **节省时间**：自动生成字幕功能减少了创作者手动输入字幕的工作量。\n- **提升SEO**：字幕文本可以增加视频的关键词密度，有助于视频在搜索引擎中的排名。\n\n## 2. 可能存在的不同观点或争议\n\n### 不同观点：\n- **字幕准确性**：自动生成的字幕可能存在错误，这可能会影响观众对内容的理解。\n- **语言多样性**：视频中提到的英语方言多样性可能会引起关于语言标准化的讨论。\n- **版权问题**：自动生成字幕可能会涉及版权问题，尤其是当视频内容包含他人的原创文本时。\n\n### 争议：\n- **技术依赖**：过度依赖自动字幕可能会使创作者忽视手动校对的重要性，从而导致字幕质量下降。\n\n## 3. 对观众的启发和实际应用\n\n### 启发：\n- **提升内容质量**：了解如何添加和编辑字幕可以激励创作者提升视频的整体质量。\n- **增强互动性**：通过在评论区询问观众对字幕的建议，创作者可以与观众建立更紧密的联系。\n\n### 实际应用：\n- **视频制作流程**：创作者可以将添加字幕作为视频制作流程的一部分，确保视频发布时已包含准确字幕。\n- **观众反馈**：根据观众对字幕的反馈进行改进，以提升字幕的准确性和观众满意度。\n\n## 4. 相关的扩展思考\n\n- **字幕语言扩展**：随着YouTube用户群体的国际化，创作者可以考虑添加更多语言字幕，以吸引更多非英语母语的观众。\n- **字幕技术发展**：随着人工智能技术的进步，未来自动字幕的准确性可能会大幅提高，从而减少人工校对的需求。\n- **内容创作者责任**：创作者应意识到自动字幕可能存在的局限性，并积极采取措施确保字幕的准确性。\n```\n"
+				},
+				"reportHtml": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>YouTube 视频深度解读 - ZQjZqQjtpz0</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"微软雅黑\", Arial, sans-serif;\n            line-height: 1.8;\n            color: #3a3a3a;\n            background: #f7f8fa;\n            padding: 0;\n            font-size: 17px;\n        }\n\n        .article-container {\n            max-width: 720px;\n            margin: 0 auto;\n            background: #ffffff;\n            box-shadow: 0 2px 12px rgba(0,0,0,0.08);\n        }\n\n        /* 文章头部 */\n        .article-header {\n            padding: 48px 24px 32px;\n            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n            color: #ffffff;\n            text-align: center;\n        }\n\n        .article-title {\n            font-size: 28px;\n            font-weight: 600;\n            line-height: 1.4;\n            margin-bottom: 16px;\n            letter-spacing: 0.5px;\n        }\n\n        .article-meta {\n            font-size: 14px;\n            opacity: 0.9;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            gap: 12px;\n            flex-wrap: wrap;\n        }\n\n        .article-meta span {\n            display: inline-flex;\n            align-items: center;\n            gap: 4px;\n        }\n\n        /* 视频信息卡片 */\n        .video-card {\n            margin: 24px;\n            padding: 20px;\n            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);\n            border-radius: 12px;\n            border-left: 4px solid #667eea;\n        }\n\n        .video-card-title {\n            font-size: 14px;\n            color: #667eea;\n            font-weight: 600;\n            margin-bottom: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .video-link {\n            color: #667eea;\n            text-decoration: none;\n            font-weight: 500;\n            word-break: break-all;\n            transition: color 0.3s;\n        }\n\n        .video-link:hover {\n            color: #764ba2;\n            text-decoration: underline;\n        }\n\n        /* 文章正文 */\n        .article-body {\n            padding: 32px 24px;\n        }\n\n        /* 引言/摘要 */\n        .article-intro {\n            font-size: 18px;\n            line-height: 1.8;\n            color: #5a5a5a;\n            padding: 24px;\n            background: #f9fafb;\n            border-left: 4px solid #667eea;\n            border-radius: 4px;\n            margin-bottom: 40px;\n            font-style: italic;\n        }\n\n        /* 章节 */\n        .section {\n            margin-bottom: 48px;\n        }\n\n        .section-header {\n            display: flex;\n            align-items: center;\n            gap: 12px;\n            margin-bottom: 24px;\n            padding-bottom: 12px;\n            border-bottom: 2px solid #e8e8e8;\n        }\n\n        .section-icon {\n            font-size: 28px;\n            line-height: 1;\n        }\n\n        .section-title {\n            font-size: 24px;\n            font-weight: 600;\n            color: #2c3e50;\n            letter-spacing: 0.5px;\n        }\n\n        /* 段落样式 */\n        .article-body p {\n            margin: 20px 0;\n            text-align: justify;\n            text-indent: 2em;\n            line-height: 1.9;\n        }\n\n        .article-body p:first-child {\n            text-indent: 0;\n        }\n\n        /* 标题样式 */\n        .article-body h1,\n        .article-body h2,\n        .article-body h3 {\n            color: #2c3e50;\n            font-weight: 600;\n            margin: 32px 0 16px;\n            line-height: 1.4;\n        }\n\n        .article-body h1 {\n            font-size: 24px;\n            padding-bottom: 12px;\n            border-bottom: 2px solid #e8e8e8;\n        }\n\n        .article-body h2 {\n            font-size: 22px;\n        }\n\n        .article-body h3 {\n            font-size: 20px;\n            color: #667eea;\n        }\n\n        /* 列表样式 */\n        .article-body ul,\n        .article-body ol {\n            margin: 20px 0;\n            padding-left: 2em;\n        }\n\n        .article-body li {\n            margin: 12px 0;\n            line-height: 1.8;\n        }\n\n        .article-body ul li {\n            list-style: none;\n            position: relative;\n            padding-left: 1.2em;\n        }\n\n        .article-body ul li::before {\n            content: \"•\";\n            color: #667eea;\n            font-weight: bold;\n            position: absolute;\n            left: 0;\n        }\n\n        /* 重点卡片 */\n        .highlight-card {\n            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);\n            padding: 20px 24px;\n            border-radius: 12px;\n            margin: 24px 0;\n            border-left: 4px solid #fdcb6e;\n            box-shadow: 0 4px 12px rgba(253, 203, 110, 0.2);\n        }\n\n        .highlight-card p {\n            text-indent: 0 !important;\n            margin: 8px 0;\n        }\n\n        /* 关键点列表 */\n        .key-points-list {\n            margin: 24px 0;\n        }\n\n        .key-point-item {\n            background: #ffffff;\n            padding: 16px 20px;\n            margin: 16px 0;\n            border-radius: 8px;\n            border-left: 4px solid #667eea;\n            box-shadow: 0 2px 8px rgba(0,0,0,0.06);\n            transition: all 0.3s ease;\n            position: relative;\n            padding-left: 48px;\n        }\n\n        .key-point-item:hover {\n            transform: translateX(4px);\n            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);\n        }\n\n        .key-point-item::before {\n            content: \"✓\";\n            position: absolute;\n            left: 16px;\n            top: 50%;\n            transform: translateY(-50%);\n            width: 24px;\n            height: 24px;\n            background: #667eea;\n            color: white;\n            border-radius: 50%;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            font-weight: bold;\n            font-size: 14px;\n        }\n\n        /* 思维导图样式 */\n        .mindmap-container {\n            background: #f9fafb;\n            padding: 24px;\n            border-radius: 12px;\n            margin: 24px 0;\n        }\n\n        .mindmap-container ul {\n            list-style: none;\n            padding-left: 0;\n        }\n\n        .mindmap-container li {\n            margin: 12px 0;\n            padding-left: 24px;\n            position: relative;\n        }\n\n        .mindmap-container li::before {\n            content: \"▸\";\n            color: #667eea;\n            font-weight: bold;\n            position: absolute;\n            left: 0;\n            font-size: 18px;\n        }\n\n        .mindmap-container ul ul {\n            padding-left: 24px;\n            margin-top: 8px;\n        }\n\n        .mindmap-container ul ul li::before {\n            content: \"◦\";\n            font-size: 16px;\n        }\n\n        /* 代码样式 */\n        .article-body code {\n            background: #f4f4f4;\n            padding: 3px 8px;\n            border-radius: 4px;\n            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;\n            font-size: 0.9em;\n            color: #e83e8c;\n        }\n\n        .article-body pre {\n            background: #2c3e50;\n            color: #ecf0f1;\n            padding: 20px;\n            border-radius: 8px;\n            overflow-x: auto;\n            margin: 24px 0;\n            line-height: 1.6;\n        }\n\n        .article-body pre code {\n            background: none;\n            padding: 0;\n            color: inherit;\n        }\n\n        /* 强调文本 */\n        .article-body strong {\n            color: #2c3e50;\n            font-weight: 600;\n        }\n\n        .article-body em {\n            color: #667eea;\n            font-style: normal;\n            font-weight: 500;\n        }\n\n        /* 分隔线 */\n        .divider {\n            height: 1px;\n            background: linear-gradient(to right, transparent, #e8e8e8, transparent);\n            margin: 40px 0;\n        }\n\n        /* 文章底部 */\n        .article-footer {\n            padding: 32px 24px;\n            background: #f9fafb;\n            border-top: 1px solid #e8e8e8;\n            text-align: center;\n        }\n\n        .footer-brand {\n            font-size: 16px;\n            color: #667eea;\n            font-weight: 600;\n            margin-bottom: 8px;\n        }\n\n        .footer-powered {\n            font-size: 13px;\n            color: #999;\n        }\n\n        .footer-timestamp {\n            font-size: 12px;\n            color: #bbb;\n            margin-top: 12px;\n        }\n\n        /* 响应式设计 */\n        @media (max-width: 768px) {\n            body {\n                font-size: 16px;\n            }\n\n            .article-header {\n                padding: 32px 20px 24px;\n            }\n\n            .article-title {\n                font-size: 24px;\n            }\n\n            .article-body {\n                padding: 24px 20px;\n            }\n\n            .section-title {\n                font-size: 20px;\n            }\n\n            .article-body h1 {\n                font-size: 20px;\n            }\n\n            .article-body h2 {\n                font-size: 18px;\n            }\n\n            .article-body h3 {\n                font-size: 17px;\n            }\n        }\n\n        /* 打印样式 */\n        @media print {\n            body {\n                background: white;\n            }\n\n            .article-container {\n                box-shadow: none;\n            }\n\n            .article-header {\n                background: #667eea;\n                -webkit-print-color-adjust: exact;\n                print-color-adjust: exact;\n            }\n        }\n    </style>\n</head>\n<body>\n    <article class=\"article-container\">\n        <!-- 文章头部 -->\n        <header class=\"article-header\">\n            <h1 class=\"article-title\">📺 YouTube 视频深度解读</h1>\n            <div class=\"article-meta\">\n                <span>🤖 AI 智能分析</span>\n                <span>•</span>\n                <span>📅 2025年11月18日 12:06</span>\n            </div>\n        </header>\n\n        <!-- 视频信息卡片 -->\n        <div class=\"video-card\">\n            <div class=\"video-card-title\">📌 视频来源</div>\n            <a href=\"https://www.youtube.com/watch?v=ZQjZqQjtpz0\" target=\"_blank\" class=\"video-link\">https://www.youtube.com/watch?v=ZQjZqQjtpz0</a>\n        </div>\n\n        <!-- 文章正文 -->\n        <div class=\"article-body\">\n            <!-- 引言 -->\n            <div class=\"article-intro\">\n                <p>```markdown<br><h1>如何自动为YouTube视频添加字幕</h1></p>\n            </div>\n\n            <!-- 主要内容 -->\n            <section class=\"section\">\n                <div class=\"section-header\">\n                    <span class=\"section-icon\">📖</span>\n                    <h2 class=\"section-title\">内容概览</h2>\n                </div>\n                <h2>视频主要内容</h2>\n本视频教程展示了如何在YouTube上为视频自动添加并编辑字幕，确保字幕的正确性，而无需花费太多时间。\n\n<h2>核心观点</h2>\n<ul>\n<li>自动生成的字幕可能存在错误，需要手动检查和编辑。</li>\n<li>YouTube提供了多种语言的字幕选项。</li>\n<li>通过编辑字幕时间轴，可以更方便地管理字幕。</li>\n</ul>\n\n<h2>视频逻辑结构</h2>\n\n<h3>1. 登录YouTube Studio</h3>\n<ul>\n<li>打开电脑，进入YouTube Studio。</li>\n<li>点击右上角的个人频道图标，进入YouTube Studio。</li>\n</ul>\n\n<h3>2. 选择视频</h3>\n<ul>\n<li>在“内容”选项卡中，选择你想要添加字幕的视频。</li>\n</ul>\n\n<h3>3. 添加字幕语言</h3>\n<ul>\n<li>在视频详情页面左侧，找到“字幕”选项（位于评论部分下方）。</li>\n<li>如果还没有设置字幕语言，可以点击“添加语言”并选择所需语言。</li>\n</ul>\n\n<h3>4. 字幕编辑</h3>\n<ul>\n<li>视频已默认设置英语字幕，但提供多种英语方言选项，如澳大利亚英语、加拿大英语等。</li>\n<li>建议复制并编辑自动生成的字幕，以检查错误。</li>\n<li>可以通过编辑时间轴来拆分字幕，便于管理。</li>\n<li>逐字播放视频，检查字幕是否有误。</li>\n</ul>\n\n<h3>5. 错误修正</h3>\n<ul>\n<li>如果发现错误，可以直接在文本框中修改，字幕会自动更新。</li>\n</ul>\n\n<h3>6. 发布字幕</h3>\n<ul>\n<li>完成所有修正后，点击右上角的“发布”按钮。</li>\n</ul>\n\n<h3>7. 求助与社区加入</h3>\n<ul>\n<li>如果有任何问题或疑问，可以在评论区留言，创作者会提供帮助。</li>\n<li>如果有兴趣加入YouTube频道增长社区，可以查看视频描述中的链接。</li>\n</ul>\n\n<h3>8. 相关视频推荐</h3>\n<ul>\n<li>如果还没有找到适合自己YouTube频道的定位，可以观看创作者提供的另一个视频，帮助快速找到正确的方向。</li>\n</ul>\n```\n            </section>\n\n            <div class=\"divider\"></div>\n\n            <!-- 核心要点 -->\n            <section class=\"section\">\n                <div class=\"section-header\">\n                    <span class=\"section-icon\">💎</span>\n                    <h2 class=\"section-title\">核心要点</h2>\n                </div>\n                <div class=\"key-points-list\">\n                    <div class=\"key-point-item\">自动添加字幕或闭路字幕到YouTube视频的快速简便方法。</div><div class=\"key-point-item\">通过YouTube工作室为视频添加字幕。</div><div class=\"key-point-item\">可以选择多种英语方言为字幕语言。</div><div class=\"key-point-item\">建议复制并编辑自动生成的字幕以检查错误。</div><div class=\"key-point-item\">可以逐字编辑时间轴以便更好地管理字幕。</div><div class=\"key-point-item\">发现错误时可以直接在框内修正。</div><div class=\"key-point-item\">完成修正后点击发布按钮完成字幕添加。</div><div class=\"key-point-item\">如有问题可以在评论区提问获得帮助。</div><div class=\"key-point-item\">加入社区以加速YouTube频道增长。</div><div class=\"key-point-item\">寻找合适的内容定位以助频道增长。</div>\n                </div>\n            </section>\n\n            <div class=\"divider\"></div>\n\n            <!-- 内容结构 -->\n            <section class=\"section\">\n                <div class=\"section-header\">\n                    <span class=\"section-icon\">🗺️</span>\n                    <h2 class=\"section-title\">内容结构</h2>\n                </div>\n                <div class=\"mindmap-container\">\n                    <pre><code>\n<ul>\n<li>Adding Subtitles to YouTube Videos</li>\n<li>Accessing YouTube Studio</li>\n<li>Navigate to channel</li>\n<li>Open YouTube Studio</li>\n<li>Select 'Content'</li>\n<li>Selecting Video</li>\n<li>Choose video for subtitles</li>\n<li>Click on 'Details'</li>\n<li>Managing Subtitles</li>\n<li>Navigate to 'Subtitles'</li>\n<li>Add language (if needed)</li>\n<li>Duplicate and edit subtitles</li>\n<li>Editing Subtitles</li>\n<li>Edit timings</li>\n<li>Check for mistakes</li>\n<li>Correct mistakes</li>\n<li>Publishing</li>\n<li>Click 'Publish'</li>\n<li>Support and Community</li>\n<li>Comment with questions</li>\n<li>Join small YouTubers community</li>\n<li>Find the right niche</li>\n</ul>\n</code></pre>\n                </div>\n            </section>\n\n            <div class=\"divider\"></div>\n\n            <!-- 深度思考 -->\n            <section class=\"section\">\n                <div class=\"section-header\">\n                    <span class=\"section-icon\">💡</span>\n                    <h2 class=\"section-title\">深度思考</h2>\n                </div>\n                <pre><code>markdown\n<h1>深度分析：如何自动为YouTube视频添加字幕</h1>\n\n<h2>1. 内容的深层含义和价值</h2>\n\n<h3>深层含义：</h3>\n这段字幕内容主要介绍了一种快速且简便的方法，帮助用户自动为YouTube视频添加字幕。深层含义在于提高视频的可访问性和观众体验，同时节省创作者的时间。\n\n<h3>价值：</h3>\n<ul>\n<li><strong>提升可访问性</strong>：字幕使得听力受损的观众也能理解视频内容，增加了视频的包容性。</li>\n<li><strong>优化观众体验</strong>：字幕可以帮助观众在嘈杂环境或无法开启声音的情况下观看视频。</li>\n<li><strong>节省时间</strong>：自动生成字幕功能减少了创作者手动输入字幕的工作量。</li>\n<li><strong>提升SEO</strong>：字幕文本可以增加视频的关键词密度，有助于视频在搜索引擎中的排名。</li>\n</ul>\n\n<h2>2. 可能存在的不同观点或争议</h2>\n\n<h3>不同观点：</h3>\n<ul>\n<li><strong>字幕准确性</strong>：自动生成的字幕可能存在错误，这可能会影响观众对内容的理解。</li>\n<li><strong>语言多样性</strong>：视频中提到的英语方言多样性可能会引起关于语言标准化的讨论。</li>\n<li><strong>版权问题</strong>：自动生成字幕可能会涉及版权问题，尤其是当视频内容包含他人的原创文本时。</li>\n</ul>\n\n<h3>争议：</h3>\n<ul>\n<li><strong>技术依赖</strong>：过度依赖自动字幕可能会使创作者忽视手动校对的重要性，从而导致字幕质量下降。</li>\n</ul>\n\n<h2>3. 对观众的启发和实际应用</h2>\n\n<h3>启发：</h3>\n<ul>\n<li><strong>提升内容质量</strong>：了解如何添加和编辑字幕可以激励创作者提升视频的整体质量。</li>\n<li><strong>增强互动性</strong>：通过在评论区询问观众对字幕的建议，创作者可以与观众建立更紧密的联系。</li>\n</ul>\n\n<h3>实际应用：</h3>\n<ul>\n<li><strong>视频制作流程</strong>：创作者可以将添加字幕作为视频制作流程的一部分，确保视频发布时已包含准确字幕。</li>\n<li><strong>观众反馈</strong>：根据观众对字幕的反馈进行改进，以提升字幕的准确性和观众满意度。</li>\n</ul>\n\n<h2>4. 相关的扩展思考</h2>\n\n<ul>\n<li><strong>字幕语言扩展</strong>：随着YouTube用户群体的国际化，创作者可以考虑添加更多语言字幕，以吸引更多非英语母语的观众。</li>\n<li><strong>字幕技术发展</strong>：随着人工智能技术的进步，未来自动字幕的准确性可能会大幅提高，从而减少人工校对的需求。</li>\n<li><strong>内容创作者责任</strong>：创作者应意识到自动字幕可能存在的局限性，并积极采取措施确保字幕的准确性。</li>\n</ul>\n</code></pre>\n            </section>\n        </div>\n\n        <!-- 文章底部 -->\n        <footer class=\"article-footer\">\n            <div class=\"footer-brand\">ToolsHub YouTube Analyzer</div>\n            <div class=\"footer-powered\">Powered by BigModel GLM-4-Air</div>\n            <div class=\"footer-timestamp\">生成时间：2025年11月18日 12:06</div>\n        </footer>\n    </article>\n</body>\n</html>",
+				"thumbnailUrl": "https://img.youtube.com/vi/ZQjZqQjtpz0/mqdefault.jpg"
+			}
+		],
+		"total": 1
+	}
 }

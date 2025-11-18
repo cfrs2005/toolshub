@@ -107,7 +107,7 @@ const YouTubeWidget: React.FC<WidgetProps> = ({ pluginId, onNavigate }) => {
                 <span>🕒 {HistoryService.formatTimestamp(record.timestamp)}</span>
               </p>
               <p style={styles.cardSummary}>
-                {record.analysisResult.readingNotes.substring(0, 60)}...
+                {record.analysisResult.summary?.substring(0, 60) || '暂无摘要'}...
               </p>
               <div style={styles.cardStats}>
                 <span style={styles.stat}>📝 {record.analysisResult.keyPoints.length} 要点</span>

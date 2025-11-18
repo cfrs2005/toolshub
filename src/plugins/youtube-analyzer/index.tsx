@@ -241,7 +241,7 @@ const YouTubeAnalyzer: React.FC = () => {
                     </span>
                   </p>
                   <p style={styles.historySummary}>
-                    {record.analysisResult.readingNotes.substring(0, 100)}...
+                    {record.analysisResult.summary?.substring(0, 100) || '暂无摘要'}...
                   </p>
                 </div>
 
