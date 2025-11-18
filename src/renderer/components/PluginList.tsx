@@ -1,5 +1,6 @@
 import React from 'react';
 import type { PluginManifest } from '../../shared/types';
+import PluginCard from './PluginCard';
 import './PluginList.css';
 
 interface PluginListProps {
@@ -8,36 +9,15 @@ interface PluginListProps {
 }
 
 const PluginList: React.FC<PluginListProps> = ({ plugins, onSelect }) => {
-  const getPluginIcon = (plugin: PluginManifest) => {
-    if (plugin.icon) return plugin.icon;
-
-    // 根据插件类型返回默认图标
-    const iconMap: Record<string, string> = {
-      tool: '🔧',
-      service: '⚙️',
-      widget: '📊',
-    };
-    return iconMap[plugin.type] || '📦';
-  };
-
   return (
     <div className="plugin-list">
       {plugins.map((plugin) => (
-        <div
+        <PluginCard
           key={plugin.id}
-          className="plugin-card"
-          onClick={() => onSelect(plugin.id)}
-        >
-          <div className="plugin-icon">{getPluginIcon(plugin)}</div>
-          <div className="plugin-info">
-            <h3 className="plugin-name">{plugin.name}</h3>
-            <p className="plugin-description">{plugin.description}</p>
-            <div className="plugin-meta">
-              <span className="plugin-version">v{plugin.version}</span>
-              <span className="plugin-type">{plugin.type}</span>
-            </div>
-          </div>
-        </div>
+          plugin={plugin}
+          onSelect={onSelect}
+          showActivateButton={false}
+        />
       ))}
     </div>
   );

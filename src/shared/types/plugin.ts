@@ -111,3 +111,42 @@ export interface SaveDialogOptions {
   buttonLabel?: string;
   filters?: { name: string; extensions: string[] }[];
 }
+
+/**
+ * 消息类型
+ */
+export type MessageType = 'user' | 'system' | 'success' | 'error' | 'progress';
+
+/**
+ * 交互面板消息
+ */
+export interface InteractionMessage {
+  id: string;
+  type: MessageType;
+  content: string;
+  timestamp: number;
+  metadata?: {
+    progress?: number; // 0-100
+    actionButton?: {
+      label: string;
+      action: string;
+    };
+  };
+}
+
+/**
+ * 插件交互面板状态
+ */
+export type InteractionStatus = 'idle' | 'processing' | 'completed' | 'error';
+
+/**
+ * 插件交互面板配置
+ */
+export interface PluginInteractionConfig {
+  /** 输入框占位符 */
+  inputPlaceholder?: string;
+  /** 是否显示输入框 */
+  showInput?: boolean;
+  /** 欢迎消息 */
+  welcomeMessage?: string;
+}
