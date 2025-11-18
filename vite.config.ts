@@ -11,10 +11,13 @@ export default defineConfig({
     emptyOutDir: true,
   },
   resolve: {
-    alias: {
-      '@shared': path.resolve(__dirname, './src/shared'),
-      '@plugins': path.resolve(__dirname, './src/plugins'),
-    },
+    alias: [
+      // 路径别名配置，与 tsconfig.json 的 paths 保持一致
+      // tsconfig.json: "@shared/*": ["src/shared/*"]
+      { find: '@shared', replacement: path.resolve(__dirname, 'src/shared') },
+      // tsconfig.json: "@plugins/*": ["src/plugins/*"]
+      { find: '@plugins', replacement: path.resolve(__dirname, 'src/plugins') },
+    ],
   },
   server: {
     port: 3000,
