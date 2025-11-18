@@ -1,0 +1,24 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/main/index.ts",
+    "src/main/plugin-loader.ts",
+    "src/shared/types/plugin.ts",
+    "src/renderer/pluginRegistry.tsx"
+  ],
+  "out": "docs/api",
+  "name": "ToolsHub API Documentation",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "skipErrorChecking": true,
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  },
+  "categorizeByGroup": true,
+  "plugin": [],
+  "theme": "default"
+}

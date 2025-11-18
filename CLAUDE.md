@@ -25,6 +25,11 @@ npm run package:mac      # 打包 macOS 应用
 npm run package:win      # 打包 Windows 应用
 ```
 
+### 文档生成
+```bash
+npm run docs             # 使用 TypeDoc 生成 API 文档（输出到 docs/api）
+```
+
 ## 架构核心
 
 ### 三层架构
@@ -108,3 +113,22 @@ plugin-name/
 - `@plugins/*` → `src/plugins/*`
 
 注意: vite.config.ts 使用数组格式的 alias 配置，并有注释说明与 tsconfig.json 的对应关系。
+
+## 项目文档
+
+### API 文档
+- 使用 TypeDoc 自动生成
+- 配置文件: `typedoc.json`
+- 输出目录: `docs/api/`
+- 运行 `npm run docs` 生成
+
+### 架构决策记录 (ADR)
+- 目录: `docs/adr/`
+- 模板: `docs/adr/template.md`
+- 用于记录重要的架构决策及其原因
+
+主要 ADR:
+- ADR-001: 插件系统架构设计
+- ADR-002: 动态插件注册表生成
+
+添加新的架构决策时，请遵循 ADR 模板格式。
